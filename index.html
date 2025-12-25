@@ -5,50 +5,67 @@
   <title>Unidad Control de Gestión | Hospital San Luis de Buin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="icon" href="favicon.ico">
-  <link rel="stylesheet" href="css/estilos.css">
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <!-- CSS institucional -->
+  <link rel="stylesheet" href="./assets/css/estilos.css">
 </head>
 
 <body>
 
-<div class="contenedor-principal">
+<div class="container py-5">
 
-  <!-- ENCABEZADO -->
-  <header class="institucional-header">
-    <h1>Unidad Control de Gestión</h1>
-    <h2>Hospital San Luis de Buin</h2>
-    <p class="bajada">
-      Panel institucional de apoyo a la gestión clínica y administrativa
-    </p>
+  <!-- HEADER -->
+  <header class="text-center mb-5">
+    <h1 class="fw-semibold">Unidad Control de Gestión</h1>
+    <h2 class="fs-6 text-muted">Hospital San Luis de Buin</h2>
   </header>
 
-  <!-- NAVEGACIÓN DE MÓDULOS -->
-  <nav class="modulos-nav">
-    <a href="modulos/atencion_urgencia.html">Atención Urgencia</a>
-    <a href="modulos/atencion_ambulatoria.html">Atención Ambulatoria</a>
-    <a href="modulos/atencion_pabellon.html">Atención Pabellón</a>
-    <a href="modulos/atencion_cerrada.html">Atención Cerrada</a>
-  </nav>
+  <!-- BOTONES DE MÓDULOS -->
+  <div class="row g-4 justify-content-center mb-5">
+
+    <div class="col-12 col-md-6 col-lg-3">
+      <a href="./modules/atencion_urgencia.html"
+         class="btn btn-primary w-100 py-4">
+        Atención de Urgencia
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3">
+      <a href="./modules/atencion_ambulatoria.html"
+         class="btn btn-primary w-100 py-4">
+        Atención Ambulatoria
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3">
+      <a href="./modules/atencion_pabellon.html"
+         class="btn btn-primary w-100 py-4">
+        Atención de Pabellón
+      </a>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-3">
+      <a href="./modules/atencion_cerrada.html"
+         class="btn btn-primary w-100 py-4">
+        Atención Cerrada
+      </a>
+    </div>
+
+  </div>
 
   <!-- DESCRIPCIÓN -->
-  <section class="panel">
-    <h2>Sobre esta página</h2>
-    <p>
-      Esta vista corresponde a una visualización de indicadores clave de desempeño,
-      desarrollada como herramienta de apoyo para la gestión clínica y administrativa
-      del Hospital San Luis de Buin.
-    </p>
-    <p>
-      Los datos presentados son simulados con criterios realistas y la estructura
-      del sistema es modular, escalable y orientada al análisis institucional.
+  <section class="mx-auto text-center" style="max-width: 800px;">
+    <h3 class="mb-3">Sobre este panel</h3>
+    <p class="text-muted">
+      Dashboard institucional de indicadores para apoyo a la gestión clínica
+      y administrativa del Hospital San Luis de Buin.
     </p>
   </section>
-
-  <!-- FOOTER -->
-  <footer class="institucional-footer">
-    Hospital San Luis de Buin · Unidad Control de Gestión<br>
-    Uso institucional · Información referencial
-  </footer>
 
 </div>
 
