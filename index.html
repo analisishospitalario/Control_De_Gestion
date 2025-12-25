@@ -2,56 +2,87 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard Gestión Hospitalaria</title>
+  <title>Control de Gestión | Hospital San Luis de Buin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="css/estilos.css">
 </head>
+
 <body>
 
-<header>
-  <h1>Dashboard de Gestión Hospitalaria</h1>
-  <p>Indicadores operacionales de acceso, producción y eficiencia</p>
+<header class="institucional-header">
+  <h1>Hospital San Luis de Buin</h1>
+  <h2>Unidad de Control de Gestión</h2>
+  <p>
+    Panel de indicadores operacionales para apoyo a la gestión clínica
+    y administrativa.
+  </p>
 </header>
 
 <section class="kpis">
 
   <div class="card">
     <h3>Atención Ambulatoria</h3>
-    <p>Consultas, inasistencias y productividad</p>
-    <a href="modulos/atencion_ambulatoria.html">Ingresar →</a>
+    <p>
+      Producción de consultas.
+    </p>
+    <a class="btn-ingresar" href="modulos/atencion_ambulatoria.html">
+      Ingresar al módulo
+    </a>
   </div>
 
   <div class="card">
     <h3>Atención Cerrada</h3>
-    <p>Gestión de camas, estancia y egresos</p>
-    <a href="modulos/atencion_cerrada.html">Ingresar →</a>
+    <p>
+      Gestión de egresos hospitalarios.
+    </p>
+    <a class="btn-ingresar" href="modulos/atencion_cerrada.html">
+      Ingresar al módulo
+    </a>
   </div>
 
   <div class="card">
     <h3>Pabellón Quirúrgico</h3>
-    <p>Uso de pabellón y cumplimiento quirúrgico</p>
-    <a href="modulos/atencion_pabellon.html">Ingresar →</a>
+    <p>
+      Producción de pabellon.
+    </p>
+    <a class="btn-ingresar" href="modulos/atencion_pabellon.html">
+      Ingresar al módulo
+    </a>
   </div>
 
   <div class="card">
-    <h3>Urgencia</h3>
-    <p>Tiempos de espera, triage y hospitalización</p>
-    <a href="modulos/atencion_urgencia.html">Ingresar →</a>
+    <h3>Servicio de Urgencia</h3>
+    <p>
+      Producción de urgencia.
+    </p>
+    <a class="btn-ingresar" href="modulos/atencion_urgencia.html">
+      Ingresar al módulo
+    </a>
   </div>
 
 </section>
 
 <section class="panel">
-  <h2>Sobre este dashboard</h2>
+  <h2>Sobre este panel</h2>
   <p>
-    Prototipo de visualización de indicadores clave para la gestión hospitalaria,
-    orientado a análisis operacional y toma de decisiones clínicas y administrativas.
+    Esta vista corresponde a una visualización de indicadores
+    clave de desempeño, desarrollado como herramienta de apoyo para la
+    Unidad de Control de Gestión del Hospital San Luis de Buin.
   </p>
   <p>
-    Datos simulados con criterios realistas. Arquitectura preparada para
-    futura integración con sistemas institucionales.
+    Los datos presentados son simulados con criterios realistas y la estructura
+    del sistema es modular y escalable.
   </p>
 </section>
 
+<footer class="institucional-footer">
+  Hospital San Luis de Buin · Unidad de Control de Gestión<br>
+  Proyecto demostrativo · Datos simulados · Uso institucional
+</footer>
+
 </body>
+</html>
+
 </html>
