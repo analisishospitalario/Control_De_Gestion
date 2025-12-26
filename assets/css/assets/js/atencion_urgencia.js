@@ -4,7 +4,7 @@
    DATA – Urgencia mensual
    ========================================================= */
 
-const urgenciaMensual = [
+var urgenciaMensual = [
   { mes: "Enero", tipo: "Adulto", prestacion: "Medica", demanda: 3200, atendido: 2900, abandono: 300 },
   { mes: "Enero", tipo: "Pediatrica", prestacion: "Medica", demanda: 1800, atendido: 1650, abandono: 150 },
   { mes: "Enero", tipo: "Adulto", prestacion: "Gineco-Obstetra", demanda: 900, atendido: 870, abandono: 30 },
@@ -20,22 +20,42 @@ const urgenciaMensual = [
    GRÁFICO
    ========================================================= */
 
-let chartUrgencia = null;
+var chartUrgencia = null;
 
 function renderGrafico(data) {
 
-  const meses = [...new Set(data.map(d => d.mes))];
+  if (typeof Chart === "undefined") {
+    console.error("Chart.js no está cargado.");
+    return;
+  }
 
-  const sumar = campo =>
-    meses.map(m =>
-      data.filter(d => d.mes === m)
-          .reduce((acc, d) => acc + d[campo], 0)
-    );
+  var meses = [];
+  for (var i = 0; i < data.length; i++) {
+    if (meses.indexOf(data[i].mes) === -1) {
+      meses.push(data[i].mes);
+    }
+  }
 
-  const ctx = document.getElementById("grafico-urgencia");
+  function sumar(campo) {
+    var resultado = [];
+    for (var m = 0; m < meses.length; m++) {
+      var total = 0;
+      for (var j = 0; j < data.length; j++) {
+        if (data[j].mes === meses[m]) {
+          total += data[j][campo];
+        }
+      }
+      resultado.push(total);
+    }
+    return resultado;
+  }
+
+  var ctx = document.getElementById("grafico-urgencia");
   if (!ctx) return;
 
-  if (chartUrgencia) chartUrgencia.destroy();
+  if (chartUrgencia) {
+    chartUrgencia.destroy();
+  }
 
   chartUrgencia = new Chart(ctx, {
     type: "bar",
@@ -62,19 +82,21 @@ function renderGrafico(data) {
 
 function calcularAcumulado(data) {
 
-  const total = data.reduce(
-    (acc, d) => {
-      acc.demanda += d.demanda;
-      acc.atendido += d.atendido;
-      acc.abandono += d.abandono;
-      return acc;
-    },
-    { demanda: 0, atendido: 0, abandono: 0 }
-  );
+  var total = { demanda: 0, atendido: 0, abandono: 0 };
+
+  for (var i = 0; i < data.length; i++) {
+    total.demanda += data[i].demanda;
+    total.atendido += data[i].atendido;
+    total.abandono += data[i].abandono;
+  }
 
   return {
-    atendido: total.demanda ? ((total.atendido / total.demanda) * 100).toFixed(1) : "0.0",
-    abandono: total.demanda ? ((total.abandono / total.demanda) * 100).toFixed(1) : "0.0"
+    atendido: total.demanda
+      ? ((total.atendido / total.demanda) * 100).toFixed(1)
+      : "0.0",
+    abandono: total.demanda
+      ? ((total.abandono / total.demanda) * 100).toFixed(1)
+      : "0.0"
   };
 }
 
@@ -82,32 +104,35 @@ function calcularAcumulado(data) {
    FILTROS + INIT
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
 
-  const filtroTipo = document.getElementById("filtro-tipo");
-  const filtroPrestacion = document.getElementById("filtro-prestacion");
+  var filtroTipo = document.getElementById("filtro-tipo");
+  var filtroPrestacion = document.getElementById("filtro-prestacion");
+  var kpiAtendido = document.getElementById("kpi-atendido-anual");
+  var kpiAbandono = document.getElementById("kpi-abandono-anual");
 
   function aplicarFiltros() {
 
-    let data = urgenciaMensual;
+    var data = urgenciaMensual.slice();
 
     if (filtroTipo && filtroTipo.value !== "Todos") {
-      data = data.filter(d => d.tipo === filtroTipo.value);
+      data = data.filter(function (d) {
+        return d.tipo === filtroTipo.value;
+      });
     }
 
     if (filtroPrestacion && filtroPrestacion.value !== "Todas") {
-      data = data.filter(d => d.prestacion === filtroPrestacion.value);
+      data = data.filter(function (d) {
+        return d.prestacion === filtroPrestacion.value;
+      });
     }
 
     renderGrafico(data);
 
-    const acumulado = calcularAcumulado(data);
+    var acumulado = calcularAcumulado(data);
 
-    document.getElementById("kpi-atendido-anual").textContent =
-      acumulado.atendido + "%";
-
-    document.getElementById("kpi-abandono-anual").textContent =
-      acumulado.abandono + "%";
+    if (kpiAtendido) kpiAtendido.textContent = acumulado.atendido + "%";
+    if (kpiAbandono) kpiAbandono.textContent = acumulado.abandono + "%";
   }
 
   aplicarFiltros();
