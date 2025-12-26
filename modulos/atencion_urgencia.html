@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Atención de Urgencia | Control de Gestión</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="../assets/css/estilos.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<main class="container py-5">
+
+  <!-- HEADER + BOTÓN INICIO -->
+  <header class="mb-5 d-flex justify-content-between align-items-start">
+    <div>
+      <h1 class="fw-semibold mb-1">Atención de Urgencia</h1>
+      <p class="text-muted mb-2">Flujos, tiempos de espera y hospitalización</p>
+    </div>
+
+    <a href="../index.html" class="btn btn-outline-primary btn-sm">
+      ⬅ Inicio
+    </a>
+  </header>
+
+  <!-- FILTROS + GRÁFICO -->
+  <section class="panel mb-4">
+
+    <div class="row g-3 mb-3">
+      <div class="col-md-4">
+        <label class="form-label">Tipo de atención</label>
+        <select id="filtro-tipo" class="form-select">
+          <option value="Todos">Todos</option>
+          <option value="Adulto">Adulto</option>
+          <option value="Pediatrica">Niño</option>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Prestación</label>
+        <select id="filtro-prestacion" class="form-select">
+          <option value="Todas">Todas</option>
+          <option value="Medica">Atención Médica</option>
+          <option value="Gineco-Obstetra">Gineco-Obstetra</option>
+          <option value="Matrona">Matrona</option>
+        </select>
+      </div>
+    </div>
+
+    <canvas id="grafico-urgencia" height="120"></canvas>
+
+  </section>
+
+  <!-- KPIs ACUMULADOS -->
+  <section class="kpis mt-4">
+    <div class="card">
+      <h3>% Atendido Acumulado</h3>
+      <span id="kpi-atendido-anual">0%</span>
+    </div>
+    <div class="card">
+      <h3>% Abandono Acumulado</h3>
+      <span id="kpi-abandono-anual">0%</span>
+    </div>
+  </section>
+
+</main>
+
+<footer class="text-center text-muted py-4 small">
+  Unidad de Control de Gestión · Hospital San Luis de Buin · © 2025
+</footer>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/utils.js"></script>
+<script src="../assets/js/atencion_urgencia.js"></script>
+
+</body>
+</html>
