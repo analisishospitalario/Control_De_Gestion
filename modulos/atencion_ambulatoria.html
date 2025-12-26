@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Atención Ambulatoria | Control de Gestión</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CSS institucional -->
+  <link rel="stylesheet" href="../assets/css/estilos.css">
+</head>
+
+<body>
+
+<main class="container py-5">
+
+  <header class="mb-5">
+    <h1 class="fw-semibold mb-1">Atención Ambulatoria</h1>
+    <p class="text-muted mb-2">Gestión de acceso, oportunidad y productividad asistencial</p>
+    <a href="../index.html" class="btn btn-sm btn-outline-secondary">← Volver</a>
+  </header>
+
+  <!-- KPIs -->
+  <section class="kpis">
+    <div class="card"><h3>Consultas Realizadas</h3><span id="kpi-consultas">0</span></div>
+    <div class="card"><h3>% Inasistencia</h3><span id="kpi-inasistencia">0</span></div>
+    <div class="card"><h3>Espera Promedio</h3><span id="kpi-espera">0</span></div>
+    <div class="card"><h3>Productividad</h3><span id="kpi-productividad">0</span></div>
+  </section>
+
+  <!-- TABLA -->
+  <section class="panel">
+    <table class="table table-bordered align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Especialidad</th>
+          <th>Agendadas</th>
+          <th>Realizadas</th>
+          <th>Inasistencias</th>
+          <th>% Cumplimiento</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-especialidades"></tbody>
+    </table>
+  </section>
+
+</main>
+
+<footer class="text-center text-muted py-4 small">
+  Unidad de Control de Gestión · Hospital San Luis de Buin · © 2025
+</footer>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/utils.js"></script>
+<script src="../assets/js/atencion_ambulatoria.js"></script>
+
+</body>
+</html>
