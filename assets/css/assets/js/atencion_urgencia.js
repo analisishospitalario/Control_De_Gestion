@@ -17,7 +17,7 @@ const urgenciaMensual = [
 ];
 
 /* =========================================================
-   GRÁFICO MENSUAL
+   GRÁFICO
    ========================================================= */
 
 let chartUrgencia = null;
@@ -33,6 +33,7 @@ function renderGrafico(data) {
     );
 
   const ctx = document.getElementById("grafico-urgencia");
+  if (!ctx) return;
 
   if (chartUrgencia) chartUrgencia.destroy();
 
@@ -60,6 +61,7 @@ function renderGrafico(data) {
    ========================================================= */
 
 function calcularAcumulado(data) {
+
   const total = data.reduce(
     (acc, d) => {
       acc.demanda += d.demanda;
@@ -71,51 +73,45 @@ function calcularAcumulado(data) {
   );
 
   return {
-    pctAtendido: total.demanda
-      ? ((total.atendido / total.demanda) * 100).toFixed(1)
-      : "0.0",
-    pctAbandono: total.demanda
-      ? ((total.abandono / total.demanda) * 100).toFixed(1)
-      : "0.0"
+    atendido: total.demanda ? ((total.atendido / total.demanda) * 100).toFixed(1) : "0.0",
+    abandono: total.demanda ? ((total.abandono / total.demanda) * 100).toFixed(1) : "0.0"
   };
 }
 
 /* =========================================================
-   FILTROS + KPIs
-   ========================================================= */
-
-function aplicarFiltros() {
-
-  const tipo = document.getElementById("filtro-tipo").value;
-  const prestacion = document.getElementById("filtro-prestacion").value;
-
-  let data = urgenciaMensual;
-
-  if (tipo !== "Todos") {
-    data = data.filter(d => d.tipo === tipo);
-  }
-
-  if (prestacion !== "Todas") {
-    data = data.filter(d => d.prestacion === prestacion);
-  }
-
-  renderGrafico(data);
-
-  const acumulado = calcularAcumulado(data);
-
-  document.getElementById("kpi-atendido-anual").textContent =
-    acumulado.pctAtendido + "%";
-
-  document.getElementById("kpi-abandono-anual").textContent =
-    acumulado.pctAbandono + "%";
-}
-
-/* =========================================================
-   INIT
+   FILTROS + INIT
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  const filtroTipo = document.getElementById("filtro-tipo");
+  const filtroPrestacion = document.getElementById("filtro-prestacion");
+
+  function aplicarFiltros() {
+
+    let data = urgenciaMensual;
+
+    if (filtroTipo && filtroTipo.value !== "Todos") {
+      data = data.filter(d => d.tipo === filtroTipo.value);
+    }
+
+    if (filtroPrestacion && filtroPrestacion.value !== "Todas") {
+      data = data.filter(d => d.prestacion === filtroPrestacion.value);
+    }
+
+    renderGrafico(data);
+
+    const acumulado = calcularAcumulado(data);
+
+    document.getElementById("kpi-atendido-anual").textContent =
+      acumulado.atendido + "%";
+
+    document.getElementById("kpi-abandono-anual").textContent =
+      acumulado.abandono + "%";
+  }
+
   aplicarFiltros();
-  document.getElementById("filtro-tipo").addEventListener("change", aplicarFiltros);
-  document.getElementById("filtro-prestacion").addEventListener("change", aplicarFiltros);
+
+  if (filtroTipo) filtroTipo.addEventListener("change", aplicarFiltros);
+  if (filtroPrestacion) filtroPrestacion.addEventListener("change", aplicarFiltros);
 });
