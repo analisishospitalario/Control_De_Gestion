@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Glosa IV | Control de Gestión</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/estilos.css">
+</head>
+
+<body>
+
+<main class="container py-5">
+
+  <header class="mb-5">
+    <h1 class="fw-semibold mb-1">Glosa IV</h1>
+    <p class="text-muted">Seguimiento presupuestario institucional</p>
+    <a href="../index.html" class="btn btn-sm btn-outline-secondary">← Volver</a>
+  </header>
+
+  <section class="card mb-4">
+    <div class="card-body">
+      <form id="filtrosGlosa" class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Año</label>
+          <select id="anio" class="form-select">
+            <option value="2025" selected>2025</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Programa</label>
+          <select id="programa" class="form-select">
+            <option value="todos">Todos</option>
+            <option value="urgencia">Urgencia</option>
+            <option value="ambulatorio">Ambulatorio</option>
+            <option value="pabellon">Pabellón</option>
+            <option value="cerrada">Atención Cerrada</option>
+          </select>
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+          <button type="submit" class="btn btn-primary w-100">Aplicar filtros</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-body">
+      <table class="table table-bordered align-middle" id="tablaGlosa">
+        <thead class="table-light">
+          <tr>
+            <th>Programa</th>
+            <th>Ítem</th>
+            <th>Presupuesto</th>
+            <th>Ejecutado</th>
+            <th>% Ejecución</th>
+            <th data-bs-toggle="tooltip"
+                title="Diferencia entre presupuesto asignado y ejecutado"
+                aria-label="Desviación presupuestaria">
+              Desviación
+            </th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer class="text-center text-muted py-4 small">
+  Unidad de Control de Gestión · Hospital San Luis de Buin · © 2025
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/utils.js"></script>
+<script src="../assets/js/glosa_iv.js"></script>
+
+</body>
+</html>
