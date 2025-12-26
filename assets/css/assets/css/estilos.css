@@ -1,14 +1,27 @@
 /* =========================
+   Normalización técnica segura
+   (NO elimina nada existente)
+========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* =========================
    Base
 ========================= */
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   background-color: #f5f7fa;
   color: #222;
+  margin: 0;
+  padding: 0;
 }
 
 h1, h2, h3 {
   font-weight: 600;
+  margin-top: 0;
 }
 
 /* =========================
@@ -38,6 +51,7 @@ h1, h2, h3 {
 .card h3 {
   font-size: 1rem;
   color: #495057;
+  margin-bottom: 0.5rem;
 }
 
 /* =========================
@@ -67,6 +81,7 @@ h1, h2, h3 {
 .kpi-card span {
   font-size: 2rem;
   font-weight: 700;
+  display: block;
 }
 
 /* =========================
@@ -109,11 +124,12 @@ h1, h2, h3 {
 
 .btn-primary {
   background-color: #004a99;
-  border: none;
+  border-color: #004a99; /* refuerzo Bootstrap */
 }
 
 .btn-primary:hover {
   background-color: #003b7a;
+  border-color: #003b7a;
 }
 
 .btn-outline-primary {
@@ -137,20 +153,41 @@ h1, h2, h3 {
 /* =========================
    Semáforos Control de Gestión
 ========================= */
-.kpi-ok { color: #198754; }
-.kpi-warn { color: #fd7e14; }
-.kpi-bad { color: #dc3545; }
+.kpi-ok { 
+  color: #198754; 
+}
+
+.kpi-warn { 
+  color: #fd7e14; 
+}
+
+.kpi-bad { 
+  color: #dc3545; 
+}
 
 .kpi-label {
-  display: block;
+  display: inline-block; /* mejora visual sin romper */
   font-size: 0.7rem;
   margin-top: 0.25rem;
   font-weight: 600;
+  padding: 0.25em 0.6em; /* añadido seguro */
+  border-radius: 999px; /* añadido seguro */
 }
 
-.kpi-label.ok { color: #198754; }
-.kpi-label.warn { color: #fd7e14; }
-.kpi-label.bad { color: #dc3545; }
+.kpi-label.ok { 
+  color: #198754; 
+  background-color: rgba(25, 135, 84, 0.12);
+}
+
+.kpi-label.warn { 
+  color: #fd7e14; 
+  background-color: rgba(253, 126, 20, 0.15);
+}
+
+.kpi-label.bad { 
+  color: #dc3545; 
+  background-color: rgba(220, 53, 69, 0.15);
+}
 
 /* =========================
    Tooltips (MEJORA 2)
