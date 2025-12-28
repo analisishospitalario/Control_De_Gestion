@@ -10,8 +10,7 @@
         {
           "glosa": "Dias Cama Disponibles",
           "acumulado": 35440,
-          "mensual": 
-          {
+          "mensual": {
             "enero": 2885,
             "febrero": 2755,
             "marzo": 2949,
@@ -523,24 +522,6 @@
       }
     },
     {
-      "glosa": "Indice de Rotación",
-      "acumulado": null,
-      "mensual": {
-        "enero": 5.78,
-        "febrero": 5.64,
-        "marzo": 6.25,
-        "abril": 6.26,
-        "mayo": 5.13,
-        "junio": 5.17,
-        "julio": 4.15,
-        "agosto": 4.98,
-        "septiembre": 4.47,
-        "octubre": 4.74,
-        "noviembre": 5.27,
-        "diciembre": 5.74
-      }
-    },
-    {
       "glosa": "Letalidad",
       "unidad": "%",
       "acumulado": 2.54,
@@ -580,7 +561,7 @@
     }
   ]
 },
- {
+{
   "codigo": 404,
   "nombre": "Área Médico-Quirúrgico Cuidados Medios",
   "indicadores": [
@@ -736,24 +717,6 @@
       }
     },
     {
-      "glosa": "Indice de Rotación",
-      "acumulado": null,
-      "mensual": {
-        "enero": 4.88,
-        "febrero": 4.26,
-        "marzo": 4.06,
-        "abril": 4.52,
-        "mayo": 4.25,
-        "junio": 4.75,
-        "julio": 5.11,
-        "agosto": 4.37,
-        "septiembre": 4.39,
-        "octubre": 4.55,
-        "noviembre": 4.54,
-        "diciembre": 4.77
-      }
-    },
-    {
       "glosa": "Letalidad",
       "unidad": "%",
       "acumulado": 8.37,
@@ -861,15 +824,15 @@
         "enero": 2.97,
         "febrero": 2.69,
         "marzo": 2.97,
-        "abril": 3,
-        "mayo": 3,
+        "abril": 3.0,
+        "mayo": 3.0,
         "junio": 2.83,
         "julio": 2.84,
-        "agosto": 3,
+        "agosto": 3.0,
         "septiembre": 2.9,
         "octubre": 2.74,
-        "noviembre": 3,
-        "diciembre": 3
+        "noviembre": 3.0,
+        "diciembre": 3.0
       }
     },
     {
@@ -925,7 +888,7 @@
         "agosto": 30.11,
         "septiembre": 64.37,
         "octubre": 47.06,
-        "noviembre": 30,
+        "noviembre": 30.0,
         "diciembre": 23.66
       }
     },
@@ -941,29 +904,11 @@
         "mayo": 3.4,
         "junio": 4.88,
         "julio": 3.13,
-        "agosto": 4,
-        "septiembre": 4,
+        "agosto": 4.0,
+        "septiembre": 4.0,
         "octubre": 5.18,
-        "noviembre": 3,
+        "noviembre": 3.0,
         "diciembre": 4.4
-      }
-    },
-    {
-      "glosa": "Indice de Rotación",
-      "acumulado": null,
-      "mensual": {
-        "enero": 1.35,
-        "febrero": 1.12,
-        "marzo": 1.68,
-        "abril": 3,
-        "mayo": 4,
-        "junio": 4.24,
-        "julio": 4.23,
-        "agosto": 2,
-        "septiembre": 4.48,
-        "octubre": 4.38,
-        "noviembre": 3.67,
-        "diciembre": 2
       }
     },
     {
@@ -1072,17 +1017,17 @@
       "acumulado": 3.05,
       "mensual": {
         "enero": 2.94,
-        "febrero": 3,
+        "febrero": 3.0,
         "marzo": 3.03,
-        "abril": 3,
+        "abril": 3.0,
         "mayo": 3.39,
         "junio": 2.97,
         "julio": 3.16,
-        "agosto": 3,
+        "agosto": 3.0,
         "septiembre": 3.03,
         "octubre": 3.03,
         "noviembre": 3.1,
-        "diciembre": 3
+        "diciembre": 3.0
       }
     },
     {
@@ -1162,24 +1107,6 @@
       }
     },
     {
-      "glosa": "Indice de Rotación",
-      "acumulado": null,
-      "mensual": {
-        "enero": 3.41,
-        "febrero": 2.67,
-        "marzo": 3.63,
-        "abril": 4.67,
-        "mayo": 5.61,
-        "junio": 7.75,
-        "julio": 7.28,
-        "agosto": 5.33,
-        "septiembre": 4.95,
-        "octubre": 7.59,
-        "noviembre": 5.81,
-        "diciembre": 6
-      }
-    },
-    {
       "glosa": "Letalidad",
       "unidad": "%",
       "acumulado": 0,
@@ -1228,9 +1155,18 @@
       "unidad": "días",
       "acumulado": 0,
       "mensual": {
-        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
-        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
-        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+        "enero": 0,
+        "febrero": 0,
+        "marzo": 0,
+        "abril": 0,
+        "mayo": 0,
+        "junio": 0,
+        "julio": 0,
+        "agosto": 0,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 0,
+        "diciembre": 0
       }
     },
     {
@@ -1238,9 +1174,18 @@
       "unidad": "días",
       "acumulado": 0,
       "mensual": {
-        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
-        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
-        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+        "enero": 0,
+        "febrero": 0,
+        "marzo": 0,
+        "abril": 0,
+        "mayo": 0,
+        "junio": 0,
+        "julio": 0,
+        "agosto": 0,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 0,
+        "diciembre": 0
       }
     },
     {
@@ -1248,18 +1193,36 @@
       "unidad": "días",
       "acumulado": 0,
       "mensual": {
-        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
-        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
-        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+        "enero": 0,
+        "febrero": 0,
+        "marzo": 0,
+        "abril": 0,
+        "mayo": 0,
+        "junio": 0,
+        "julio": 0,
+        "agosto": 0,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 0,
+        "diciembre": 0
       }
     },
     {
       "glosa": "Promedio Cama Disponibles",
       "acumulado": 0,
       "mensual": {
-        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
-        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
-        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+        "enero": 0,
+        "febrero": 0,
+        "marzo": 0,
+        "abril": 0,
+        "mayo": 0,
+        "junio": 0,
+        "julio": 0,
+        "agosto": 0,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 0,
+        "diciembre": 0
       }
     },
     {
@@ -1267,9 +1230,18 @@
       "unidad": "casos",
       "acumulado": 0,
       "mensual": {
-        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
-        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
-        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+        "enero": 0,
+        "febrero": 0,
+        "marzo": 0,
+        "abril": 0,
+        "mayo": 0,
+        "junio": 0,
+        "julio": 0,
+        "agosto": 0,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 0,
+        "diciembre": 0
       }
     },
     {
@@ -1277,9 +1249,18 @@
       "unidad": "casos",
       "acumulado": 0,
       "mensual": {
-        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
-        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
-        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+        "enero": 0,
+        "febrero": 0,
+        "marzo": 0,
+        "abril": 0,
+        "mayo": 0,
+        "junio": 0,
+        "julio": 0,
+        "agosto": 0,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 0,
+        "diciembre": 0
       }
     },
     {
@@ -1287,9 +1268,18 @@
       "unidad": "%",
       "acumulado": 0,
       "mensual": {
-        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
-        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
-        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+        "enero": 0,
+        "febrero": 0,
+        "marzo": 0,
+        "abril": 0,
+        "mayo": 0,
+        "junio": 0,
+        "julio": 0,
+        "agosto": 0,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 0,
+        "diciembre": 0
       }
     },
     {
@@ -1297,18 +1287,18 @@
       "unidad": "días",
       "acumulado": 0,
       "mensual": {
-        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
-        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
-        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
-      }
-    },
-    {
-      "glosa": "Indice de Rotación",
-      "acumulado": 0,
-      "mensual": {
-        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
-        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
-        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+        "enero": 0,
+        "febrero": 0,
+        "marzo": 0,
+        "abril": 0,
+        "mayo": 0,
+        "junio": 0,
+        "julio": 0,
+        "agosto": 0,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 0,
+        "diciembre": 0
       }
     },
     {
@@ -1316,9 +1306,18 @@
       "unidad": "%",
       "acumulado": 0,
       "mensual": {
-        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
-        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
-        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+        "enero": 0,
+        "febrero": 0,
+        "marzo": 0,
+        "abril": 0,
+        "mayo": 0,
+        "junio": 0,
+        "julio": 0,
+        "agosto": 0,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 0,
+        "diciembre": 0
       }
     },
     {
@@ -1326,9 +1325,18 @@
       "unidad": "casos",
       "acumulado": 0,
       "mensual": {
-        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
-        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
-        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+        "enero": 0,
+        "febrero": 0,
+        "marzo": 0,
+        "abril": 0,
+        "mayo": 0,
+        "junio": 0,
+        "julio": 0,
+        "agosto": 0,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 0,
+        "diciembre": 0
       }
     }
   ]
