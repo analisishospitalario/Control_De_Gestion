@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let dataActual = null;
   let dataComparar = null;
 
-  // 🔒 Lista fija de KPIs (misma vista 2024 / 2025)
+  // KPIs fijos → vista igual 2024 / 2025
   const INDICADORES_BASE = [
     "Dias Cama Disponibles",
     "Dias Cama Ocupados",
@@ -27,28 +27,17 @@ document.addEventListener("DOMContentLoaded", () => {
     "julio","agosto","septiembre","octubre","noviembre","diciembre"
   ];
 
-  // =========================
-  // CARGA JSON
-  // =========================
   async function cargarJSON(anio) {
     const res = await fetch(`../data/atencion_cerrada/${anio}.json`);
     return res.ok ? res.json() : null;
   }
 
-  // =========================
-  // NORMALIZAR MENSUAL (CLAVE)
-  // =========================
   function normalizarMensual(ind) {
-    const seguro = {};
-    MESES.forEach(m => {
-      seguro[m] = ind?.mensual?.[m] ?? null;
-    });
-    return seguro;
+    const out = {};
+    MESES.forEach(m => out[m] = ind?.mensual?.[m] ?? null);
+    return out;
   }
 
-  // =========================
-  // NIVELES
-  // =========================
   function cargarNiveles(data) {
     nivel.innerHTML = "";
     data.niveles.forEach(n => {
@@ -59,9 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // =========================
-  // RENDER KPIs
-  // =========================
   function render() {
     contenedor.innerHTML = `<div class="kpis"></div>`;
     const grid = contenedor.firstElementChild;
@@ -78,12 +64,14 @@ document.addEventListener("DOMContentLoaded", () => {
           ? ind.acumulado
           : ind.mensual?.[mes.value] ?? "—";
 
+      const tieneDatos = ind && Object.values(normalizarMensual(ind)).some(v => v !== null);
+
       grid.innerHTML += `
         <div class="kpi-card">
           <h3>${nombre}</h3>
           <span>${valor} ${ind?.unidad ?? ""}</span>
           <button class="btn btn-sm btn-outline-primary mt-2"
-            ${ind ? `onclick="mostrarGrafico('${nombre}')"` : "disabled"}>
+            ${tieneDatos ? `onclick="mostrarGrafico('${nombre}')"` : "disabled"}>
             Ver gráfico
           </button>
         </div>
@@ -94,9 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderTablaComparativa(niv);
   }
 
-  // =========================
-  // TABLA MENSUAL
-  // =========================
   function renderTablaMensual(niv) {
     const tbody = document.querySelector("#tabla-mensual tbody");
     tbody.innerHTML = "";
@@ -110,9 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // =========================
-  // TABLA COMPARATIVA
-  // =========================
   function renderTablaComparativa(niv) {
     const tbody = document.querySelector("#tabla-comparativa tbody");
     tbody.innerHTML = "";
@@ -142,9 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // =========================
-  // GRÁFICO (SOLUCIONADO)
-  // =========================
   window.mostrarGrafico = function (nombre) {
     const niv = dataActual.niveles.find(n => n.codigo == nivel.value);
     const ind = niv.indicadores.find(i => i.glosa === nombre);
@@ -172,23 +151,17 @@ document.addEventListener("DOMContentLoaded", () => {
     new bootstrap.Modal(document.getElementById("modalGrafico")).show();
   };
 
-  // =========================
-  // EXPORTAR VISTA
-  // =========================
   btnVista.addEventListener("click", async () => {
-    const canvas = await html2canvas(
-      document.getElementById("vista-exportable"),
-      { scale: 2, backgroundColor: "#ffffff" }
-    );
+    const canvas = await html2canvas(document.getElementById("vista-exportable"), {
+      scale: 2,
+      backgroundColor: "#ffffff"
+    });
     const link = document.createElement("a");
     link.download = `Atencion_Cerrada_${anio.value}.png`;
     link.href = canvas.toDataURL("image/png");
     link.click();
   });
 
-  // =========================
-  // EXPORTAR EXCEL
-  // =========================
   btnExcel.addEventListener("click", () => {
     const wb = XLSX.utils.book_new();
     const niv = dataActual.niveles.find(n => n.codigo == nivel.value);
@@ -203,9 +176,6 @@ document.addEventListener("DOMContentLoaded", () => {
     XLSX.writeFile(wb, `Atencion_Cerrada_${anio.value}.xlsx`);
   });
 
-  // =========================
-  // INICIO
-  // =========================
   async function iniciar() {
     dataActual = await cargarJSON(anio.value);
     dataComparar = await cargarJSON(anio.value === "2025" ? "2024" : "2025");
