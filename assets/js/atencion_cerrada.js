@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cacheJSON = {};
 
   // =========================
-  // CONSTANTES (ÍNDICE ROTACIÓN ELIMINADO)
+  // CONSTANTES
   // =========================
   const INDICADORES_BASE = [
     "Dias Cama Disponibles",
@@ -41,21 +41,22 @@ document.addEventListener("DOMContentLoaded", () => {
     "julio","agosto","septiembre","octubre","noviembre","diciembre"
   ];
 
-  // =========================
-  // UTILIDADES
-  // =========================
   const normalizarMes = v => v?.toLowerCase() ?? null;
 
-  async function cargarJSON(anio) {
-    if (cacheJSON[anio]) return cacheJSON[anio];
+  // =========================
+  // CARGA JSON (con cache)
+  // =========================
+  async function cargarJSON(year) {
+    if (cacheJSON[year]) return cacheJSON[year];
 
     try {
-      const res = await fetch(`../data/atencion_cerrada/${anio}.json`);
+      const res = await fetch(`../data/atencion_cerrada/${year}.json`);
       if (!res.ok) return null;
       const data = await res.json();
-      cacheJSON[anio] = data;
+      cacheJSON[year] = data;
       return data;
-    } catch {
+    } catch (e) {
+      console.error("Error cargando JSON:", e);
       return null;
     }
   }
@@ -71,15 +72,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================
-  // RENDER PRINCIPAL
+  // RENDER PRINCIPAL (FIX DEFINITIVO)
   // =========================
   function render() {
-    if (!dataActual?.niveles?.length) {
-      contenedor.innerHTML =
-        "<p class='text-muted'>No hay datos cargados para el año seleccionado.</p>";
+
+    // 👉 CASO 1: No hay niveles (ej. 2025 vacío)
+    if (!dataActual?.niveles || dataActual.niveles.length === 0) {
+      contenedor.innerHTML = `
+        <div class="alert alert-secondary">
+          <strong>Año ${anio.value}:</strong>
+          No existen datos cargados para este año.
+        </div>
+      `;
       document.querySelector("#tabla-mensual tbody").innerHTML = "";
       document.querySelector("#tabla-comparativa tbody").innerHTML = "";
       return;
+    }
+
+    // 👉 FIX CLAVE: si no hay nivel seleccionado, usar el primero
+    if (!nivel.value) {
+      nivel.value = dataActual.niveles[0].codigo;
     }
 
     contenedor.innerHTML = `<div class="kpis"></div>`;
@@ -110,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.className = "btn btn-sm btn-outline-primary mt-2";
       btn.textContent = "Ver gráfico";
       btn.disabled = !ind;
-      btn.onclick = () => mostrarGrafico(nombre);
+      btn.addEventListener("click", () => mostrarGrafico(nombre));
 
       card.appendChild(btn);
       fragment.appendChild(card);
@@ -158,6 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const vAnt = ant?.acumulado;
       const vAct = act?.acumulado;
+
       const diff =
         typeof vAnt === "number" && typeof vAct === "number"
           ? (vAct - vAnt).toFixed(2)
@@ -208,18 +221,18 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   // EXPORTAR
   // =========================
-  btnVista.onclick = async () => {
+  btnVista.addEventListener("click", async () => {
     const canvas = await html2canvas(
       document.getElementById("vista-exportable"),
-      { scale: 2 }
+      { scale: 2, backgroundColor: "#ffffff" }
     );
     const link = document.createElement("a");
     link.download = `Atencion_Cerrada_${anio.value}.png`;
-    link.href = canvas.toDataURL();
+    link.href = canvas.toDataURL("image/png");
     link.click();
-  };
+  });
 
-  btnExcel.onclick = () => {
+  btnExcel.addEventListener("click", () => {
     const wb = XLSX.utils.book_new();
     const niv = dataActual?.niveles?.find(n => n.codigo == nivel.value);
     if (!niv) return;
@@ -235,8 +248,9 @@ document.addEventListener("DOMContentLoaded", () => {
       XLSX.utils.aoa_to_sheet(hoja),
       "KPIs"
     );
+
     XLSX.writeFile(wb, `Atencion_Cerrada_${anio.value}.xlsx`);
-  };
+  });
 
   // =========================
   // INICIO
@@ -248,18 +262,23 @@ document.addEventListener("DOMContentLoaded", () => {
     dataComparar = await cargarJSON(year - 1);
 
     if (!dataActual) {
-      contenedor.innerHTML =
-        "<p class='text-muted'>Archivo de datos no encontrado.</p>";
+      contenedor.innerHTML = `
+        <div class="alert alert-danger">
+          No se encontró el archivo de datos del año ${anio.value}.
+        </div>
+      `;
+      nivel.innerHTML = "";
       return;
     }
 
+    nivel.innerHTML = "";
     cargarNiveles(dataActual);
     render();
   }
 
-  anio.onchange = iniciar;
-  nivel.onchange = render;
-  mes.onchange = render;
+  anio.addEventListener("change", iniciar);
+  nivel.addEventListener("change", render);
+  mes.addEventListener("change", render);
 
   iniciar();
 });
