@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 🔥 GRÁFICO DEPENDIENTE DE NIVEL + MES
+  // 🔥 GRÁFICO 100% DEPENDIENTE DE NIVEL + MES
   window.mostrarGrafico = function (nombre) {
     const niv = dataActual.niveles.find(n => n.codigo == nivel.value);
     const ind = niv.indicadores.find(i => i.glosa === nombre);
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const ctx = document.getElementById("grafico");
     if (window.chart) window.chart.destroy();
 
-    // 👉 ACUMULADO = serie completa
+    // 🔹 ACUMULADO → línea mensual
     if (mes.value === "acumulado") {
       window.chart = new Chart(ctx, {
         type: "line",
@@ -139,7 +139,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     }
-    // 👉 MES ESPECÍFICO = valor único
+
+    // 🔹 MES ESPECÍFICO → barra única
     else {
       window.chart = new Chart(ctx, {
         type: "bar",
@@ -147,8 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
           labels: [mes.value.toUpperCase()],
           datasets: [{
             label: nombre,
-            data: [ind.mensual?.[mes.value] ?? null],
-            borderWidth: 1
+            data: [ind.mensual?.[mes.value] ?? null]
           }]
         }
       });
@@ -156,6 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("modalTitulo").textContent =
       `${nombre} – ${mes.value.toUpperCase()}`;
+
     new bootstrap.Modal(document.getElementById("modalGrafico")).show();
   };
 
