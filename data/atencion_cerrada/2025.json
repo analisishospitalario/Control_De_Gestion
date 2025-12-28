@@ -1,7 +1,8 @@
 {
-  "codigo": 1,
-  "nombre": "Datos Establecimiento",
-  "indicadores": [
+ "anio": 2025,
+  "establecimiento": "Hospital San Luis de Buin",
+  "area": "Atención Cerrada",
+  "niveles": [
     {
       "glosa": "Dias Cama Disponibles",
       "acumulado": 32848,
