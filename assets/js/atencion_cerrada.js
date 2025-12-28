@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let dataActual = null;
   let dataComparar = null;
 
-  // KPIs fijos → vista igual 2024 / 2025
   const INDICADORES_BASE = [
     "Dias Cama Disponibles",
     "Dias Cama Ocupados",
@@ -30,12 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
   async function cargarJSON(anio) {
     const res = await fetch(`../data/atencion_cerrada/${anio}.json`);
     return res.ok ? res.json() : null;
-  }
-
-  function normalizarMensual(ind) {
-    const out = {};
-    MESES.forEach(m => out[m] = ind?.mensual?.[m] ?? null);
-    return out;
   }
 
   function cargarNiveles(data) {
@@ -64,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ? ind.acumulado
           : ind.mensual?.[mes.value] ?? "—";
 
-      const tieneDatos = ind && Object.values(normalizarMensual(ind)).some(v => v !== null);
+      const tieneDatos = ind && Object.values(ind.mensual || {}).some(v => v !== null);
 
       grid.innerHTML += `
         <div class="kpi-card">
@@ -124,12 +117,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // ✅ GRÁFICO CORREGIDO DEFINITIVAMENTE
   window.mostrarGrafico = function (nombre) {
     const niv = dataActual.niveles.find(n => n.codigo == nivel.value);
     const ind = niv.indicadores.find(i => i.glosa === nombre);
-    if (!ind) return;
+    if (!ind || !ind.mensual) return;
 
-    const mensual = normalizarMensual(ind);
+    // 🔑 SOLO meses con datos reales
+    const labels = [];
+    const data = [];
+
+    MESES.forEach(m => {
+      const v = ind.mensual[m];
+      if (v !== null && v !== undefined) {
+        labels.push(m.toUpperCase());
+        data.push(v);
+      }
+    });
+
+    if (data.length === 0) {
+      alert("Este indicador no tiene datos mensuales.");
+      return;
+    }
 
     const ctx = document.getElementById("grafico");
     if (window.chart) window.chart.destroy();
@@ -137,12 +146,12 @@ document.addEventListener("DOMContentLoaded", () => {
     window.chart = new Chart(ctx, {
       type: "line",
       data: {
-        labels: MESES.map(m => m.toUpperCase()),
+        labels,
         datasets: [{
           label: nombre,
-          data: MESES.map(m => mensual[m]),
+          data,
           borderWidth: 2,
-          spanGaps: true
+          tension: 0.3
         }]
       }
     });
