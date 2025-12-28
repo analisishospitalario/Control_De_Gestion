@@ -10,7 +10,8 @@
         {
           "glosa": "Dias Cama Disponibles",
           "acumulado": 35440,
-          "mensual": {
+          "mensual": 
+          {
             "enero": 2885,
             "febrero": 2755,
             "marzo": 2949,
@@ -1214,6 +1215,120 @@
         "octubre": 2,
         "noviembre": 6,
         "diciembre": 6
+      }
+    }
+  ]
+},
+{
+  "codigo": 413,
+  "nombre": "Área Neonatología Cuidados Básicos",
+  "indicadores": [
+    {
+      "glosa": "Dias Cama Disponibles",
+      "unidad": "días",
+      "acumulado": 0,
+      "mensual": {
+        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
+        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
+        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Dias Cama Ocupados",
+      "unidad": "días",
+      "acumulado": 0,
+      "mensual": {
+        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
+        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
+        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Dias de Estada",
+      "unidad": "días",
+      "acumulado": 0,
+      "mensual": {
+        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
+        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
+        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Promedio Cama Disponibles",
+      "acumulado": 0,
+      "mensual": {
+        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
+        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
+        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Numero de Egresos",
+      "unidad": "casos",
+      "acumulado": 0,
+      "mensual": {
+        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
+        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
+        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Egresos Fallecidos",
+      "unidad": "casos",
+      "acumulado": 0,
+      "mensual": {
+        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
+        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
+        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Indice Ocupacional",
+      "unidad": "%",
+      "acumulado": 0,
+      "mensual": {
+        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
+        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
+        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Promedio Días de Estada",
+      "unidad": "días",
+      "acumulado": 0,
+      "mensual": {
+        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
+        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
+        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Indice de Rotación",
+      "acumulado": 0,
+      "mensual": {
+        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
+        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
+        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Letalidad",
+      "unidad": "%",
+      "acumulado": 0,
+      "mensual": {
+        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
+        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
+        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Traslados",
+      "unidad": "casos",
+      "acumulado": 0,
+      "mensual": {
+        "enero": 0, "febrero": 0, "marzo": 0, "abril": 0,
+        "mayo": 0, "junio": 0, "julio": 0, "agosto": 0,
+        "septiembre": 0, "octubre": 0, "noviembre": 0, "diciembre": 0
       }
     }
   ]
