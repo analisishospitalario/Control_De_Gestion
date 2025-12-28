@@ -11,7 +11,7 @@
     rel="stylesheet"
   >
 
-  <!-- CSS institucional (NO modificar) -->
+  <!-- CSS institucional -->
   <link rel="stylesheet" href="../assets/css/estilos.css">
 </head>
 
@@ -19,7 +19,6 @@
 
 <main class="container py-4">
 
-  <!-- HEADER -->
   <header class="text-center mb-4">
     <h1 class="fw-semibold">Atención Cerrada</h1>
     <p class="text-muted mb-0">Hospital San Luis de Buin</p>
@@ -38,9 +37,7 @@
 
     <div class="col-md-6">
       <label for="nivel" class="form-label fw-semibold">Nivel de Cuidado</label>
-      <select id="nivel" class="form-select">
-        <!-- Se carga por JS -->
-      </select>
+      <select id="nivel" class="form-select"></select>
     </div>
 
     <div class="col-md-3">
@@ -64,22 +61,13 @@
 
   </section>
 
-  <!-- BOTONES -->
   <div class="mb-3">
-    <button class="btn btn-outline-secondary" type="button" onclick="exportarVista()">
-      Exportar vista
-    </button>
-    <button class="btn btn-outline-success ms-2" type="button" onclick="exportarExcel()">
-      Exportar a Excel
-    </button>
+    <button class="btn btn-outline-secondary" onclick="exportarVista()">Exportar vista</button>
+    <button class="btn btn-outline-success ms-2" onclick="exportarExcel()">Exportar a Excel</button>
   </div>
 
-  <!-- KPIs -->
-  <section id="contenedor">
-    <!-- KPIs generados por JS -->
-  </section>
+  <section id="contenedor"></section>
 
-  <!-- TABLA MENSUAL -->
   <section class="panel mt-4">
     <h2 class="h5 mb-3">Detalle mensual</h2>
     <div class="table-responsive">
@@ -87,28 +75,16 @@
         <thead>
           <tr>
             <th>Indicador</th>
-            <th>Ene</th>
-            <th>Feb</th>
-            <th>Mar</th>
-            <th>Abr</th>
-            <th>May</th>
-            <th>Jun</th>
-            <th>Jul</th>
-            <th>Ago</th>
-            <th>Sep</th>
-            <th>Oct</th>
-            <th>Nov</th>
-            <th>Dic</th>
+            <th>Ene</th><th>Feb</th><th>Mar</th><th>Abr</th>
+            <th>May</th><th>Jun</th><th>Jul</th><th>Ago</th>
+            <th>Sep</th><th>Oct</th><th>Nov</th><th>Dic</th>
           </tr>
         </thead>
-        <tbody>
-          <!-- Filas por JS -->
-        </tbody>
+        <tbody></tbody>
       </table>
     </div>
   </section>
 
-  <!-- TABLA COMPARATIVA -->
   <section class="panel mt-4">
     <h2 class="h5 mb-3">Comparación anual</h2>
     <div class="table-responsive">
@@ -121,9 +97,7 @@
             <th>Diferencia</th>
           </tr>
         </thead>
-        <tbody>
-          <!-- Filas por JS -->
-        </tbody>
+        <tbody></tbody>
       </table>
     </div>
   </section>
@@ -134,8 +108,8 @@
   Unidad de Control de Gestión · Hospital San Luis de Buin · © 2025
 </footer>
 
-<!-- MODAL GRÁFICO -->
-<div class="modal fade" id="modalGrafico" tabindex="-1" aria-hidden="true">
+<!-- MODAL -->
+<div class="modal fade" id="modalGrafico" tabindex="-1">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -154,7 +128,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
-<!-- JS PRINCIPAL (defer = CLAVE) -->
+<!-- JS PRINCIPAL -->
 <script src="../assets/js/atencion_cerrada.js" defer></script>
 
 </body>
