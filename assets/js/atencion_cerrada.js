@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  // =========================
+  // ELEMENTOS DOM
+  // =========================
   const anio = document.getElementById("anio");
   const nivel = document.getElementById("nivel");
   const mes = document.getElementById("mes");
@@ -8,17 +11,30 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnVista = document.getElementById("btnExportarVista");
   const btnExcel = document.getElementById("btnExportarExcel");
 
+  const ctxGrafico = document.getElementById("grafico");
+
+  // =========================
+  // ESTADO
+  // =========================
   let dataActual = null;
   let dataComparar = null;
+  let chartInstance = null;
 
+  // =========================
+  // CONSTANTES
+  // =========================
   const INDICADORES_BASE = [
     "Dias Cama Disponibles",
     "Dias Cama Ocupados",
-    "Indice Ocupacional",
-    "Promedio Días de Estada",
+    "Dias de Estada",
+    "Promedio Cama Disponibles",
     "Numero de Egresos",
     "Egresos Fallecidos",
-    "Letalidad"
+    "Indice Ocupacional",
+    "Promedio Días de Estada",
+    "Indice de Rotación",
+    "Letalidad",
+    "Traslados"
   ];
 
   const MESES = [
@@ -29,13 +45,17 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   // UTILIDADES
   // =========================
-  function normalizarMes(valor) {
-    return valor ? valor.toLowerCase() : null;
-  }
+  const normalizarMes = v => v ? v.toLowerCase() : null;
 
   async function cargarJSON(anio) {
-    const res = await fetch(`../data/atencion_cerrada/${anio}.json`);
-    return res.ok ? res.json() : null;
+    try {
+      const res = await fetch(`../data/atencion_cerrada/${anio}.json`);
+      if (!res.ok) return null;
+      return await res.json();
+    } catch (e) {
+      console.error("Error cargando JSON:", e);
+      return null;
+    }
   }
 
   function cargarNiveles(data) {
@@ -49,14 +69,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================
-  // RENDER KPIs
+  // RENDER PRINCIPAL
   // =========================
   function render() {
+    if (!dataActual?.niveles) {
+      contenedor.innerHTML = "<p>No hay datos disponibles</p>";
+      return;
+    }
+
     contenedor.innerHTML = `<div class="kpis"></div>`;
     const grid = contenedor.firstElementChild;
 
     const niv = dataActual.niveles.find(n => n.codigo == nivel.value);
     if (!niv) return;
+
+    const fragment = document.createDocumentFragment();
 
     INDICADORES_BASE.forEach(nombre => {
       const ind = niv.indicadores.find(i => i.glosa === nombre);
@@ -72,17 +99,26 @@ document.addEventListener("DOMContentLoaded", () => {
         (mes.value === "acumulado" ||
          ind.mensual?.[normalizarMes(mes.value)] !== undefined);
 
-      grid.innerHTML += `
-        <div class="kpi-card">
-          <h3>${nombre}</h3>
-          <span>${valor} ${ind?.unidad ?? ""}</span>
-          <button class="btn btn-sm btn-outline-primary mt-2"
-            ${existeDato ? `onclick="mostrarGrafico('${nombre}')"` : "disabled"}>
-            Ver gráfico
-          </button>
-        </div>
-      `;
+      const card = document.createElement("div");
+      card.className = "kpi-card";
+
+      const h3 = document.createElement("h3");
+      h3.textContent = nombre;
+
+      const span = document.createElement("span");
+      span.textContent = `${valor} ${ind?.unidad ?? ""}`;
+
+      const btn = document.createElement("button");
+      btn.className = "btn btn-sm btn-outline-primary mt-2";
+      btn.textContent = "Ver gráfico";
+      btn.disabled = !existeDato;
+      btn.addEventListener("click", () => mostrarGrafico(nombre));
+
+      card.append(h3, span, btn);
+      fragment.appendChild(card);
     });
+
+    grid.appendChild(fragment);
 
     renderTablaMensual(niv);
     renderTablaComparativa(niv);
@@ -97,10 +133,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     INDICADORES_BASE.forEach(nombre => {
       const ind = niv.indicadores.find(i => i.glosa === nombre);
-      let fila = `<tr><th>${nombre}</th>`;
-      MESES.forEach(m => fila += `<td>${ind?.mensual?.[m] ?? "—"}</td>`);
-      fila += "</tr>";
-      tbody.innerHTML += fila;
+      const tr = document.createElement("tr");
+
+      const th = document.createElement("th");
+      th.textContent = nombre;
+      tr.appendChild(th);
+
+      MESES.forEach(m => {
+        const td = document.createElement("td");
+        td.textContent = ind?.mensual?.[m] ?? "—";
+        tr.appendChild(td);
+      });
+
+      tbody.appendChild(tr);
     });
   }
 
@@ -111,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tbody = document.querySelector("#tabla-comparativa tbody");
     tbody.innerHTML = "";
 
-    const prev = dataComparar?.niveles.find(n => n.codigo == niv.codigo);
+    const prev = dataComparar?.niveles?.find(n => n.codigo == niv.codigo);
     if (!prev) return;
 
     INDICADORES_BASE.forEach(nombre => {
@@ -120,36 +165,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const vAnt = ant?.acumulado ?? "—";
       const vAct = act?.acumulado ?? "—";
-      const diff =
-        typeof vAnt === "number" && typeof vAct === "number"
-          ? (vAct - vAnt).toFixed(2)
-          : "—";
 
-      tbody.innerHTML += `
-        <tr>
-          <th>${nombre}</th>
-          <td>${vAnt}</td>
-          <td>${vAct}</td>
-          <td>${diff}</td>
-        </tr>
+      let diff = "—";
+      if (typeof vAnt === "number" && typeof vAct === "number") {
+        diff = (vAct - vAnt).toFixed(2);
+      }
+
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <th>${nombre}</th>
+        <td>${vAnt}</td>
+        <td>${vAct}</td>
+        <td>${diff}</td>
       `;
+      tbody.appendChild(tr);
     });
   }
 
   // =========================
-  // GRÁFICOS (CLAVE)
+  // GRÁFICOS
   // =========================
-  window.mostrarGrafico = function (nombre) {
-
+  function mostrarGrafico(nombre) {
     const niv = dataActual.niveles.find(n => n.codigo == nivel.value);
-    const ind = niv.indicadores.find(i => i.glosa === nombre);
+    const ind = niv?.indicadores.find(i => i.glosa === nombre);
     if (!ind) return;
 
-    const ctx = document.getElementById("grafico");
-    if (window.chart) window.chart.destroy();
+    if (chartInstance) chartInstance.destroy();
 
     if (mes.value === "acumulado") {
-      window.chart = new Chart(ctx, {
+      chartInstance = new Chart(ctxGrafico, {
         type: "line",
         data: {
           labels: MESES.map(m => m.toUpperCase()),
@@ -164,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       const valor = ind.mensual?.[normalizarMes(mes.value)] ?? null;
 
-      window.chart = new Chart(ctx, {
+      chartInstance = new Chart(ctxGrafico, {
         type: "bar",
         data: {
           labels: [mes.value],
@@ -179,8 +223,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("modalTitulo").textContent =
       `${nombre} – ${mes.value}`;
 
-    new bootstrap.Modal(document.getElementById("modalGrafico")).show();
-  };
+    new bootstrap.Modal(
+      document.getElementById("modalGrafico")
+    ).show();
+  }
 
   // =========================
   // EXPORTAR
@@ -206,7 +252,12 @@ document.addEventListener("DOMContentLoaded", () => {
       hoja.push([nombre, ind?.acumulado ?? ""]);
     });
 
-    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(hoja), "KPIs");
+    XLSX.utils.book_append_sheet(
+      wb,
+      XLSX.utils.aoa_to_sheet(hoja),
+      "KPIs"
+    );
+
     XLSX.writeFile(wb, `Atencion_Cerrada_${anio.value}.xlsx`);
   });
 
@@ -214,8 +265,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // INICIO
   // =========================
   async function iniciar() {
-    dataActual = await cargarJSON(anio.value);
-    dataComparar = await cargarJSON(anio.value === "2025" ? "2024" : "2025");
+    const anioNum = parseInt(anio.value, 10);
+
+    dataActual = await cargarJSON(anioNum);
+    dataComparar = await cargarJSON(anioNum - 1);
+
+    if (!dataActual) {
+      contenedor.innerHTML = "<p>No hay datos para este año</p>";
+      return;
+    }
+
     cargarNiveles(dataActual);
     render();
   }
