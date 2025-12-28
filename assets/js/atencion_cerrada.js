@@ -72,11 +72,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================
-  // RENDER PRINCIPAL (FIX DEFINITIVO)
+  // RENDER PRINCIPAL
   // =========================
   function render() {
 
-    // 👉 CASO 1: No hay niveles (ej. 2025 vacío)
     if (!dataActual?.niveles || dataActual.niveles.length === 0) {
       contenedor.innerHTML = `
         <div class="alert alert-secondary">
@@ -89,7 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // 👉 FIX CLAVE: si no hay nivel seleccionado, usar el primero
     if (!nivel.value) {
       nivel.value = dataActual.niveles[0].codigo;
     }
@@ -155,13 +153,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================
-  // TABLA COMPARATIVA
+  // TABLA COMPARATIVA (CORREGIDA)
   // =========================
   function renderTablaComparativa(niv) {
     const tbody = document.querySelector("#tabla-comparativa tbody");
     tbody.innerHTML = "";
 
-    const prev = dataComparar?.niveles?.find(n => n.codigo == niv.codigo);
+    // 👉 MENSAJE CUANDO NO EXISTE AÑO ANTERIOR
+    if (!dataComparar) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="4" class="text-muted text-center">
+            No existe información del año anterior para comparar
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    const prev = dataComparar.niveles.find(
+      n => n.codigo == niv.codigo
+    );
     if (!prev) return;
 
     INDICADORES_BASE.forEach(nombre => {
