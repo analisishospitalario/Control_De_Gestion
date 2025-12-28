@@ -1,112 +1,125 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const anio = document.getElementById("anio");
-  if (!anio) return;
-
   const nivelSel = document.getElementById("nivel");
   const mesSel = document.getElementById("mes");
   const contenedor = document.getElementById("contenedor");
 
   let dataActual = null;
-  let dataComparar = null;
+  let dataPrevio = null;
+  let chart = null;
 
-  // KPIs UNIFICADOS (SIEMPRE IGUALES)
-  const KPI_BASE = [
-    "Dias Cama Disponibles",
-    "Dias Cama Ocupados",
-    "Indice Ocupacional",
-    "Promedio Días de Estada",
-    "Numero de Egresos",
-    "Egresos Fallecidos",
-    "Letalidad"
-  ];
-
-  async function cargarJSON(anio) {
-    const res = await fetch(`../data/atencion_cerrada/${anio}.json`);
-    if (!res.ok) return null;
-    return await res.json();
+  async function cargarJSON(a) {
+    const res = await fetch(`../data/atencion_cerrada/${a}.json`);
+    return res.ok ? res.json() : null;
   }
 
   function cargarNiveles(data) {
     nivelSel.innerHTML = "";
     data.niveles.forEach(n => {
-      const o = document.createElement("option");
-      o.value = n.codigo;
-      o.textContent = n.nombre;
-      nivelSel.appendChild(o);
+      const opt = document.createElement("option");
+      opt.value = n.codigo;
+      opt.textContent = n.nombre;
+      nivelSel.appendChild(opt);
     });
   }
 
   function renderKPIs() {
+    contenedor.innerHTML = `<div class="row g-3"></div>`;
+    const grid = contenedor.firstElementChild;
+
     const nivel = dataActual.niveles.find(n => n.codigo == nivelSel.value);
     if (!nivel) return;
 
-    contenedor.innerHTML = `<div class="kpis"></div>`;
-    const grid = contenedor.querySelector(".kpis");
-
-    KPI_BASE.forEach(glosa => {
-      const ind = nivel.indicadores.find(i => i.glosa === glosa);
-      const valor = ind
-        ? (mesSel.value === "acumulado" ? ind.acumulado : ind.mensual?.[mesSel.value])
-        : null;
-
-      const unidad = ind?.unidad ?? "";
+    nivel.indicadores.forEach(ind => {
+      const valor = mesSel.value === "acumulado"
+        ? ind.acumulado
+        : ind.mensual?.[mesSel.value] ?? "—";
 
       grid.innerHTML += `
-        <div class="kpi-card">
-          <h3>${glosa}</h3>
-          <span>${valor ?? "—"} ${unidad}</span>
+        <div class="col-md-3">
+          <div class="card h-100 shadow-sm text-center p-3">
+            <small class="text-muted">${ind.glosa}</small>
+            <h3 class="fw-bold my-2">${valor} ${ind.unidad ?? ""}</h3>
+            <button class="btn btn-sm btn-outline-primary"
+              onclick="mostrarGrafico('${ind.glosa}')">
+              Ver gráfico
+            </button>
+          </div>
         </div>
       `;
     });
 
-    renderTablaMensual();
-    renderTablaComparativa();
+    renderTablaMensual(nivel);
+    renderComparativa(nivel);
   }
 
-  function renderTablaMensual() {
+  function renderTablaMensual(nivel) {
     const tbody = document.querySelector("#tabla-mensual tbody");
+    const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
     tbody.innerHTML = "";
 
-    const nivel = dataActual.niveles.find(n => n.codigo == nivelSel.value);
-    const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
-
-    KPI_BASE.forEach(glosa => {
-      const ind = nivel.indicadores.find(i => i.glosa === glosa);
-      let fila = `<tr><th>${glosa}</th>`;
-      meses.forEach(m => fila += `<td>${ind?.mensual?.[m] ?? "—"}</td>`);
+    nivel.indicadores.forEach(ind => {
+      let fila = `<tr><th>${ind.glosa}</th>`;
+      meses.forEach(m => fila += `<td>${ind.mensual?.[m] ?? "—"}</td>`);
       fila += "</tr>";
       tbody.innerHTML += fila;
     });
   }
 
-  function renderTablaComparativa() {
+  function renderComparativa(nivel) {
     const tbody = document.querySelector("#tabla-comparativa tbody");
     tbody.innerHTML = "";
 
-    const nivelA = dataActual.niveles.find(n => n.codigo == nivelSel.value);
-    const nivelB = dataComparar.niveles.find(n => n.codigo == nivelSel.value);
+    const nivelPrev = dataPrevio?.niveles.find(n => n.codigo == nivel.codigo);
+    if (!nivelPrev) return;
 
-    KPI_BASE.forEach(glosa => {
-      const a = nivelA.indicadores.find(i => i.glosa === glosa);
-      const b = nivelB.indicadores.find(i => i.glosa === glosa);
-      if (!a || !b) return;
+    nivel.indicadores.forEach(ind => {
+      const prev = nivelPrev.indicadores.find(i => i.glosa === ind.glosa);
+      if (!prev) return;
+
+      const diff = (ind.acumulado ?? 0) - (prev.acumulado ?? 0);
 
       tbody.innerHTML += `
         <tr>
-          <th>${glosa}</th>
-          <td>${b.acumulado}</td>
-          <td>${a.acumulado}</td>
-          <td>${(a.acumulado - b.acumulado).toFixed(2)}</td>
+          <th>${ind.glosa}</th>
+          <td>${prev.acumulado}</td>
+          <td>${ind.acumulado}</td>
+          <td>${diff.toFixed(2)}</td>
         </tr>
       `;
     });
   }
 
+  window.mostrarGrafico = function (glosa) {
+    const nivel = dataActual.niveles.find(n => n.codigo == nivelSel.value);
+    const ind = nivel.indicadores.find(i => i.glosa === glosa);
+
+    if (!ind?.mensual) return alert("Este indicador no tiene datos mensuales");
+
+    const ctx = document.getElementById("grafico");
+
+    if (chart) chart.destroy();
+
+    chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: Object.keys(ind.mensual),
+        datasets: [{
+          label: glosa,
+          data: Object.values(ind.mensual),
+          borderWidth: 2
+        }]
+      }
+    });
+
+    document.getElementById("modalTitulo").textContent = glosa;
+    new bootstrap.Modal(document.getElementById("modalGrafico")).show();
+  };
+
   async function iniciar() {
     dataActual = await cargarJSON(anio.value);
-    dataComparar = await cargarJSON(anio.value === "2025" ? "2024" : "2025");
-    if (!dataActual) return;
+    dataPrevio = await cargarJSON(anio.value === "2025" ? "2024" : "2025");
     cargarNiveles(dataActual);
     renderKPIs();
   }
