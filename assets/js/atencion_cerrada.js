@@ -57,14 +57,12 @@ document.addEventListener("DOMContentLoaded", () => {
           ? ind.acumulado
           : ind.mensual?.[mes.value] ?? "—";
 
-      const tieneDatos = ind && Object.values(ind.mensual || {}).some(v => v !== null);
-
       grid.innerHTML += `
         <div class="kpi-card">
           <h3>${nombre}</h3>
           <span>${valor} ${ind?.unidad ?? ""}</span>
           <button class="btn btn-sm btn-outline-primary mt-2"
-            ${tieneDatos ? `onclick="mostrarGrafico('${nombre}')"` : "disabled"}>
+            ${ind ? `onclick="mostrarGrafico('${nombre}')"` : "disabled"}>
             Ver gráfico
           </button>
         </div>
@@ -117,54 +115,55 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ✅ GRÁFICO CORREGIDO DEFINITIVAMENTE
+  // 🔥 GRÁFICO DEPENDIENTE DE NIVEL + MES
   window.mostrarGrafico = function (nombre) {
     const niv = dataActual.niveles.find(n => n.codigo == nivel.value);
     const ind = niv.indicadores.find(i => i.glosa === nombre);
-    if (!ind || !ind.mensual) return;
-
-    // 🔑 SOLO meses con datos reales
-    const labels = [];
-    const data = [];
-
-    MESES.forEach(m => {
-      const v = ind.mensual[m];
-      if (v !== null && v !== undefined) {
-        labels.push(m.toUpperCase());
-        data.push(v);
-      }
-    });
-
-    if (data.length === 0) {
-      alert("Este indicador no tiene datos mensuales.");
-      return;
-    }
+    if (!ind) return;
 
     const ctx = document.getElementById("grafico");
     if (window.chart) window.chart.destroy();
 
-    window.chart = new Chart(ctx, {
-      type: "line",
-      data: {
-        labels,
-        datasets: [{
-          label: nombre,
-          data,
-          borderWidth: 2,
-          tension: 0.3
-        }]
-      }
-    });
+    // 👉 ACUMULADO = serie completa
+    if (mes.value === "acumulado") {
+      window.chart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: MESES.map(m => m.toUpperCase()),
+          datasets: [{
+            label: nombre,
+            data: MESES.map(m => ind.mensual?.[m] ?? null),
+            borderWidth: 2,
+            spanGaps: true
+          }]
+        }
+      });
+    }
+    // 👉 MES ESPECÍFICO = valor único
+    else {
+      window.chart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: [mes.value.toUpperCase()],
+          datasets: [{
+            label: nombre,
+            data: [ind.mensual?.[mes.value] ?? null],
+            borderWidth: 1
+          }]
+        }
+      });
+    }
 
-    document.getElementById("modalTitulo").textContent = nombre;
+    document.getElementById("modalTitulo").textContent =
+      `${nombre} – ${mes.value.toUpperCase()}`;
     new bootstrap.Modal(document.getElementById("modalGrafico")).show();
   };
 
   btnVista.addEventListener("click", async () => {
-    const canvas = await html2canvas(document.getElementById("vista-exportable"), {
-      scale: 2,
-      backgroundColor: "#ffffff"
-    });
+    const canvas = await html2canvas(
+      document.getElementById("vista-exportable"),
+      { scale: 2, backgroundColor: "#ffffff" }
+    );
     const link = document.createElement("a");
     link.download = `Atencion_Cerrada_${anio.value}.png`;
     link.href = canvas.toDataURL("image/png");
