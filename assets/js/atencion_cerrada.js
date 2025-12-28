@@ -1,40 +1,51 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const anio = document.getElementById("anio");
-  const nivelSel = document.getElementById("nivel");
-  const mesSel = document.getElementById("mes");
+  const nivel = document.getElementById("nivel");
+  const mes = document.getElementById("mes");
   const contenedor = document.getElementById("contenedor");
 
-  let dataActual = null;
-  let dataPrevio = null;
-  let chart = null;
+  const btnVista = document.getElementById("btnExportarVista");
+  const btnExcel = document.getElementById("btnExportarExcel");
 
-  async function cargarJSON(a) {
-    const res = await fetch(`../data/atencion_cerrada/${a}.json`);
+  let dataActual = null;
+  let dataComparar = null;
+
+  // =========================
+  // CARGA JSON
+  // =========================
+  async function cargarJSON(anio) {
+    const res = await fetch(`../data/atencion_cerrada/${anio}.json`);
     return res.ok ? res.json() : null;
   }
 
+  // =========================
+  // NIVELES
+  // =========================
   function cargarNiveles(data) {
-    nivelSel.innerHTML = "";
+    nivel.innerHTML = "";
     data.niveles.forEach(n => {
       const opt = document.createElement("option");
       opt.value = n.codigo;
       opt.textContent = n.nombre;
-      nivelSel.appendChild(opt);
+      nivel.appendChild(opt);
     });
   }
 
-  function renderKPIs() {
+  // =========================
+  // RENDER KPIs
+  // =========================
+  function render() {
     contenedor.innerHTML = `<div class="kpis"></div>`;
     const grid = contenedor.firstElementChild;
 
-    const nivel = dataActual.niveles.find(n => n.codigo == nivelSel.value);
-    if (!nivel) return;
+    const niv = dataActual.niveles.find(n => n.codigo == nivel.value);
+    if (!niv) return;
 
-    nivel.indicadores.forEach(ind => {
-      const valor = mesSel.value === "acumulado"
+    niv.indicadores.forEach(ind => {
+      const valor = mes.value === "acumulado"
         ? ind.acumulado
-        : ind.mensual?.[mesSel.value] ?? "—";
+        : ind.mensual?.[mes.value] ?? "—";
 
       grid.innerHTML += `
         <div class="kpi-card">
@@ -48,11 +59,14 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     });
 
-    renderTablaMensual(nivel);
-    renderComparativa(nivel);
+    renderTablaMensual(niv);
+    renderTablaComparativa(niv);
   }
 
-  function renderTablaMensual(nivel) {
+  // =========================
+  // TABLA MENSUAL
+  // =========================
+  function renderTablaMensual(niv) {
     const tbody = document.querySelector("#tabla-mensual tbody");
     const meses = [
       "enero","febrero","marzo","abril","mayo","junio",
@@ -60,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
     tbody.innerHTML = "";
 
-    nivel.indicadores.forEach(ind => {
+    niv.indicadores.forEach(ind => {
       let fila = `<tr><th>${ind.glosa}</th>`;
       meses.forEach(m => fila += `<td>${ind.mensual?.[m] ?? "—"}</td>`);
       fila += "</tr>";
@@ -68,35 +82,43 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function renderComparativa(nivel) {
+  // =========================
+  // TABLA COMPARATIVA
+  // =========================
+  function renderTablaComparativa(niv) {
     const tbody = document.querySelector("#tabla-comparativa tbody");
     tbody.innerHTML = "";
 
-    const nivelPrev = dataPrevio?.niveles.find(n => n.codigo == nivel.codigo);
-    if (!nivelPrev) return;
+    const prev = dataComparar?.niveles.find(n => n.codigo == niv.codigo);
+    if (!prev) return;
 
-    nivel.indicadores.forEach(ind => {
-      const prev = nivelPrev.indicadores.find(i => i.glosa === ind.glosa);
-      if (!prev) return;
+    niv.indicadores.forEach(ind => {
+      const ant = prev.indicadores.find(i => i.glosa === ind.glosa);
+      if (!ant) return;
 
       tbody.innerHTML += `
         <tr>
           <th>${ind.glosa}</th>
-          <td>${prev.acumulado}</td>
+          <td>${ant.acumulado}</td>
           <td>${ind.acumulado}</td>
-          <td>${(ind.acumulado - prev.acumulado).toFixed(2)}</td>
+          <td>${(ind.acumulado - ant.acumulado).toFixed(2)}</td>
         </tr>
       `;
     });
   }
 
+  // =========================
+  // GRÁFICO
+  // =========================
   window.mostrarGrafico = function (glosa) {
-    const nivel = dataActual.niveles.find(n => n.codigo == nivelSel.value);
-    const ind = nivel.indicadores.find(i => i.glosa === glosa);
+    const niv = dataActual.niveles.find(n => n.codigo == nivel.value);
+    const ind = niv.indicadores.find(i => i.glosa === glosa);
     if (!ind?.mensual) return;
 
-    if (chart) chart.destroy();
-    chart = new Chart(document.getElementById("grafico"), {
+    const ctx = document.getElementById("grafico");
+    if (window.chart) window.chart.destroy();
+
+    window.chart = new Chart(ctx, {
       type: "line",
       data: {
         labels: Object.keys(ind.mensual),
@@ -112,36 +134,48 @@ document.addEventListener("DOMContentLoaded", () => {
     new bootstrap.Modal(document.getElementById("modalGrafico")).show();
   };
 
-  window.exportarVista = function () {
-    html2canvas(document.querySelector("main")).then(canvas => {
-      const link = document.createElement("a");
-      link.download = `Atencion_Cerrada_${anio.value}.png`;
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    });
-  };
+  // =========================
+  // EXPORTAR VISTA (PNG)
+  // =========================
+  btnVista.addEventListener("click", () => {
+    html2canvas(document.getElementById("vista-exportable"))
+      .then(canvas => {
+        const link = document.createElement("a");
+        link.download = `Atencion_Cerrada_${anio.value}.png`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+  });
 
-  window.exportarExcel = function () {
+  // =========================
+  // EXPORTAR EXCEL
+  // =========================
+  btnExcel.addEventListener("click", () => {
     const wb = XLSX.utils.book_new();
-    const nivel = dataActual.niveles.find(n => n.codigo == nivelSel.value);
+    const niv = dataActual.niveles.find(n => n.codigo == nivel.value);
 
-    const kpis = [["Indicador", "Acumulado"]];
-    nivel.indicadores.forEach(i => kpis.push([i.glosa, i.acumulado]));
-    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(kpis), "KPIs");
+    const hoja = [["Indicador", "Acumulado"]];
+    niv.indicadores.forEach(i => hoja.push([i.glosa, i.acumulado]));
+
+    const ws = XLSX.utils.aoa_to_sheet(hoja);
+    XLSX.utils.book_append_sheet(wb, ws, "KPIs");
 
     XLSX.writeFile(wb, `Atencion_Cerrada_${anio.value}.xlsx`);
-  };
+  });
 
+  // =========================
+  // INICIO
+  // =========================
   async function iniciar() {
     dataActual = await cargarJSON(anio.value);
-    dataPrevio = await cargarJSON(anio.value === "2025" ? "2024" : "2025");
+    dataComparar = await cargarJSON(anio.value === "2025" ? "2024" : "2025");
     cargarNiveles(dataActual);
-    renderKPIs();
+    render();
   }
 
   anio.addEventListener("change", iniciar);
-  nivelSel.addEventListener("change", renderKPIs);
-  mesSel.addEventListener("change", renderKPIs);
+  nivel.addEventListener("change", render);
+  mes.addEventListener("change", render);
 
   iniciar();
 });
