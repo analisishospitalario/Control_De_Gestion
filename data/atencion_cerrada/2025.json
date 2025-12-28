@@ -1,0 +1,153 @@
+{
+  "anio": 2025,
+  "establecimiento": "Hospital San Luis de Buin",
+  "area": "Atención Cerrada",
+  "niveles": [
+    {
+      "codigo": 1,
+      "nombre": "Datos Establecimiento",
+      "indicadores": [
+        {
+          "glosa": "Días Cama Disponibles",
+          "unidad": "días",
+          "acumulado": 32848,
+          "mensual": {
+            "enero": 3075,
+            "febrero": 2766,
+            "marzo": 3058,
+            "abril": 2942,
+            "mayo": 3019,
+            "junio": 2984,
+            "julio": 3044,
+            "agosto": 3051,
+            "septiembre": 2877,
+            "octubre": 3054,
+            "noviembre": 2978
+          }
+        },
+        {
+          "glosa": "Índice Ocupacional",
+          "unidad": "%",
+          "acumulado": 76.78,
+          "mensual": {
+            "enero": 79.67,
+            "febrero": 76.25,
+            "marzo": 77.67,
+            "abril": 73.66,
+            "mayo": 79.83,
+            "junio": 76.74,
+            "julio": 74.31,
+            "agosto": 77.97,
+            "septiembre": 77.58,
+            "octubre": 75.18,
+            "noviembre": 75.62
+          }
+        },
+        {
+          "glosa": "Promedio Días de Estada",
+          "unidad": "días",
+          "acumulado": 4.94,
+          "mensual": {
+            "enero": 5.1,
+            "febrero": 5.03,
+            "marzo": 5.15,
+            "abril": 4.66,
+            "mayo": 5.21,
+            "junio": 4.76,
+            "julio": 4.69,
+            "agosto": 5.02,
+            "septiembre": 4.94,
+            "octubre": 4.76,
+            "noviembre": 5.09
+          }
+        }
+      ]
+    },
+
+    {
+      "codigo": 330,
+      "nombre": "Área Pensionado",
+      "indicadores": [
+        {
+          "glosa": "Días Cama Ocupados",
+          "unidad": "días",
+          "acumulado": 1180,
+          "mensual": {
+            "enero": 181,
+            "febrero": 82,
+            "marzo": 122,
+            "abril": 122,
+            "mayo": 116,
+            "junio": 94,
+            "julio": 94,
+            "agosto": 103,
+            "septiembre": 66,
+            "octubre": 104,
+            "noviembre": 96
+          }
+        },
+        {
+          "glosa": "Índice Ocupacional",
+          "unidad": "%",
+          "acumulado": 83.51,
+          "mensual": {
+            "enero": 98.37,
+            "febrero": 81.19,
+            "marzo": 96.83,
+            "abril": 96.06,
+            "mayo": 92.8,
+            "junio": 78.33,
+            "julio": 73.44,
+            "agosto": 78.03,
+            "septiembre": 57.39,
+            "octubre": 81.25,
+            "noviembre": 75.59
+          }
+        }
+      ]
+    },
+
+    {
+      "codigo": 404,
+      "nombre": "Área Médico-Quirúrgico Cuidados Medios",
+      "indicadores": [
+        {
+          "glosa": "Días Cama Disponibles",
+          "unidad": "días",
+          "acumulado": 12714,
+          "mensual": {
+            "enero": 1174,
+            "febrero": 1063,
+            "marzo": 1178,
+            "abril": 1138,
+            "mayo": 1173,
+            "junio": 1140,
+            "julio": 1171,
+            "agosto": 1177,
+            "septiembre": 1145,
+            "octubre": 1176,
+            "noviembre": 1179
+          }
+        },
+        {
+          "glosa": "Índice Ocupacional",
+          "unidad": "%",
+          "acumulado": 92.4,
+          "mensual": {
+            "enero": 95.32,
+            "febrero": 92.85,
+            "marzo": 91.51,
+            "abril": 88.58,
+            "mayo": 92.41,
+            "junio": 93.51,
+            "julio": 91.37,
+            "agosto": 95.92,
+            "septiembre": 92.4,
+            "octubre": 92.94,
+            "noviembre": 89.57
+          }
+        }
+      ]
+    }
+  ]
+}

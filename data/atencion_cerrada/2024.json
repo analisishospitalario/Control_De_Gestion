@@ -1,0 +1,51 @@
+{
+  "anio": 2024,
+  "establecimiento": "Hospital San Luis de Buin",
+  "area": "Atención Cerrada",
+  "niveles": [
+    {
+      "codigo": 1,
+      "nombre": "Datos Establecimiento",
+      "indicadores": [
+        {
+          "glosa": "Índice Ocupacional",
+          "unidad": "%",
+          "acumulado": 77.32,
+          "mensual": {
+            "enero": 76.5,
+            "febrero": 74.05,
+            "marzo": 76.98,
+            "abril": 77.19,
+            "mayo": 75.39,
+            "junio": 71.46,
+            "julio": 78.63,
+            "agosto": 83.58,
+            "septiembre": 83.27,
+            "octubre": 77.61,
+            "noviembre": 77.03,
+            "diciembre": 75.5
+          }
+        },
+        {
+          "glosa": "Promedio Días de Estada",
+          "unidad": "días",
+          "acumulado": 5.44,
+          "mensual": {
+            "enero": 5.41,
+            "febrero": 5.05,
+            "marzo": 5.3,
+            "abril": 5.83,
+            "mayo": 5.25,
+            "junio": 4.84,
+            "julio": 5.5,
+            "agosto": 6.26,
+            "septiembre": 5.26,
+            "octubre": 5.91,
+            "noviembre": 5.64,
+            "diciembre": 4.93
+          }
+        }
+      ]
+    }
+  ]
+}
