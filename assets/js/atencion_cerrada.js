@@ -11,17 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let dataActual = null;
   let dataComparar = null;
 
-  // =========================
-  // CARGA JSON
-  // =========================
   async function cargarJSON(anio) {
     const res = await fetch(`../data/atencion_cerrada/${anio}.json`);
     return res.ok ? res.json() : null;
   }
 
-  // =========================
-  // NIVELES
-  // =========================
   function cargarNiveles(data) {
     nivel.innerHTML = "";
     data.niveles.forEach(n => {
@@ -32,9 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // =========================
-  // RENDER KPIs
-  // =========================
   function render() {
     contenedor.innerHTML = `<div class="kpis"></div>`;
     const grid = contenedor.firstElementChild;
@@ -63,15 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
     renderTablaComparativa(niv);
   }
 
-  // =========================
-  // TABLA MENSUAL
-  // =========================
   function renderTablaMensual(niv) {
     const tbody = document.querySelector("#tabla-mensual tbody");
-    const meses = [
-      "enero","febrero","marzo","abril","mayo","junio",
-      "julio","agosto","septiembre","octubre","noviembre","diciembre"
-    ];
+    const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
     tbody.innerHTML = "";
 
     niv.indicadores.forEach(ind => {
@@ -82,9 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // =========================
-  // TABLA COMPARATIVA
-  // =========================
   function renderTablaComparativa(niv) {
     const tbody = document.querySelector("#tabla-comparativa tbody");
     tbody.innerHTML = "";
@@ -107,65 +89,45 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // =========================
-  // GRÁFICO
-  // =========================
-  window.mostrarGrafico = function (glosa) {
-    const niv = dataActual.niveles.find(n => n.codigo == nivel.value);
-    const ind = niv.indicadores.find(i => i.glosa === glosa);
-    if (!ind?.mensual) return;
+  // ================= EXPORTAR VISTA =================
+  btnVista.addEventListener("click", async () => {
+    const elemento = document.getElementById("vista-exportable");
 
-    const ctx = document.getElementById("grafico");
-    if (window.chart) window.chart.destroy();
-
-    window.chart = new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: Object.keys(ind.mensual),
-        datasets: [{
-          label: glosa,
-          data: Object.values(ind.mensual),
-          borderWidth: 2
-        }]
-      }
+    const canvas = await html2canvas(elemento, {
+      scale: 2,
+      backgroundColor: "#ffffff",
+      useCORS: true
     });
 
-    document.getElementById("modalTitulo").textContent = glosa;
-    new bootstrap.Modal(document.getElementById("modalGrafico")).show();
-  };
-
-  // =========================
-  // EXPORTAR VISTA (PNG)
-  // =========================
-  btnVista.addEventListener("click", () => {
-    html2canvas(document.getElementById("vista-exportable"))
-      .then(canvas => {
-        const link = document.createElement("a");
-        link.download = `Atencion_Cerrada_${anio.value}.png`;
-        link.href = canvas.toDataURL("image/png");
-        link.click();
-      });
+    const link = document.createElement("a");
+    link.download = `Atencion_Cerrada_${anio.value}_${nivel.options[nivel.selectedIndex].text}.png`;
+    link.href = canvas.toDataURL("image/png");
+    link.click();
   });
 
-  // =========================
-  // EXPORTAR EXCEL
-  // =========================
+  // ================= EXPORTAR EXCEL =================
   btnExcel.addEventListener("click", () => {
     const wb = XLSX.utils.book_new();
     const niv = dataActual.niveles.find(n => n.codigo == nivel.value);
 
-    const hoja = [["Indicador", "Acumulado"]];
-    niv.indicadores.forEach(i => hoja.push([i.glosa, i.acumulado]));
+    // Hoja KPIs
+    const hojaKPIs = [["Indicador", "Acumulado"]];
+    niv.indicadores.forEach(i => hojaKPIs.push([i.glosa, i.acumulado]));
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(hojaKPIs), "KPIs");
 
-    const ws = XLSX.utils.aoa_to_sheet(hoja);
-    XLSX.utils.book_append_sheet(wb, ws, "KPIs");
+    // Hoja Mensual
+    const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+    const hojaMensual = [["Indicador", ...meses.map(m => m.toUpperCase())]];
+
+    niv.indicadores.forEach(i => {
+      hojaMensual.push([i.glosa, ...meses.map(m => i.mensual?.[m] ?? "")]);
+    });
+
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(hojaMensual), "Detalle mensual");
 
     XLSX.writeFile(wb, `Atencion_Cerrada_${anio.value}.xlsx`);
   });
 
-  // =========================
-  // INICIO
-  // =========================
   async function iniciar() {
     dataActual = await cargarJSON(anio.value);
     dataComparar = await cargarJSON(anio.value === "2025" ? "2024" : "2025");
