@@ -19,10 +19,27 @@
 
 <main class="container py-4">
 
+  <!-- HEADER -->
   <header class="text-center mb-4">
     <h1 class="fw-semibold">Atención Cerrada</h1>
     <p class="text-muted mb-0">Hospital San Luis de Buin</p>
   </header>
+
+  <!-- BOTONES SUPERIORES -->
+  <div class="mb-4 d-flex justify-content-between align-items-center">
+    <a href="../index.html" class="btn btn-outline-secondary">
+      ← Volver al inicio
+    </a>
+
+    <div>
+      <button class="btn btn-outline-secondary" onclick="exportarVista()">
+        Exportar vista
+      </button>
+      <button class="btn btn-outline-success ms-2" onclick="exportarExcel()">
+        Exportar a Excel
+      </button>
+    </div>
+  </div>
 
   <!-- FILTROS -->
   <section class="row g-3 mb-4">
@@ -61,13 +78,10 @@
 
   </section>
 
-  <div class="mb-3">
-    <button class="btn btn-outline-secondary" onclick="exportarVista()">Exportar vista</button>
-    <button class="btn btn-outline-success ms-2" onclick="exportarExcel()">Exportar a Excel</button>
-  </div>
-
+  <!-- KPIs -->
   <section id="contenedor"></section>
 
+  <!-- TABLA MENSUAL -->
   <section class="panel mt-4">
     <h2 class="h5 mb-3">Detalle mensual</h2>
     <div class="table-responsive">
@@ -85,6 +99,7 @@
     </div>
   </section>
 
+  <!-- TABLA COMPARATIVA -->
   <section class="panel mt-4">
     <h2 class="h5 mb-3">Comparación anual</h2>
     <div class="table-responsive">
@@ -108,7 +123,7 @@
   Unidad de Control de Gestión · Hospital San Luis de Buin · © 2025
 </footer>
 
-<!-- MODAL -->
+<!-- MODAL GRÁFICO -->
 <div class="modal fade" id="modalGrafico" tabindex="-1">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
