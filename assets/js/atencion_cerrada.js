@@ -26,6 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
     "julio","agosto","septiembre","octubre","noviembre","diciembre"
   ];
 
+  // =========================
+  // UTILIDADES
+  // =========================
+  function normalizarMes(valor) {
+    return valor ? valor.toLowerCase() : null;
+  }
+
   async function cargarJSON(anio) {
     const res = await fetch(`../data/atencion_cerrada/${anio}.json`);
     return res.ok ? res.json() : null;
@@ -41,6 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // =========================
+  // RENDER KPIs
+  // =========================
   function render() {
     contenedor.innerHTML = `<div class="kpis"></div>`;
     const grid = contenedor.firstElementChild;
@@ -51,18 +61,23 @@ document.addEventListener("DOMContentLoaded", () => {
     INDICADORES_BASE.forEach(nombre => {
       const ind = niv.indicadores.find(i => i.glosa === nombre);
 
-      const valor = !ind
-        ? "—"
-        : mes.value === "acumulado"
+      const valor =
+        !ind ? "—" :
+        mes.value === "acumulado"
           ? ind.acumulado
-          : ind.mensual?.[mes.value] ?? "—";
+          : ind.mensual?.[normalizarMes(mes.value)] ?? "—";
+
+      const existeDato =
+        ind &&
+        (mes.value === "acumulado" ||
+         ind.mensual?.[normalizarMes(mes.value)] !== undefined);
 
       grid.innerHTML += `
         <div class="kpi-card">
           <h3>${nombre}</h3>
           <span>${valor} ${ind?.unidad ?? ""}</span>
           <button class="btn btn-sm btn-outline-primary mt-2"
-            ${ind ? `onclick="mostrarGrafico('${nombre}')"` : "disabled"}>
+            ${existeDato ? `onclick="mostrarGrafico('${nombre}')"` : "disabled"}>
             Ver gráfico
           </button>
         </div>
@@ -73,6 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
     renderTablaComparativa(niv);
   }
 
+  // =========================
+  // TABLA MENSUAL
+  // =========================
   function renderTablaMensual(niv) {
     const tbody = document.querySelector("#tabla-mensual tbody");
     tbody.innerHTML = "";
@@ -86,6 +104,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // =========================
+  // TABLA COMPARATIVA
+  // =========================
   function renderTablaComparativa(niv) {
     const tbody = document.querySelector("#tabla-comparativa tbody");
     tbody.innerHTML = "";
@@ -115,8 +136,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 🔥 GRÁFICO 100% DEPENDIENTE DE NIVEL + MES
+  // =========================
+  // GRÁFICOS (CLAVE)
+  // =========================
   window.mostrarGrafico = function (nombre) {
+
     const niv = dataActual.niveles.find(n => n.codigo == nivel.value);
     const ind = niv.indicadores.find(i => i.glosa === nombre);
     if (!ind) return;
@@ -124,7 +148,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const ctx = document.getElementById("grafico");
     if (window.chart) window.chart.destroy();
 
-    // 🔹 ACUMULADO → línea mensual
     if (mes.value === "acumulado") {
       window.chart = new Chart(ctx, {
         type: "line",
@@ -133,33 +156,35 @@ document.addEventListener("DOMContentLoaded", () => {
           datasets: [{
             label: nombre,
             data: MESES.map(m => ind.mensual?.[m] ?? null),
-            borderWidth: 2,
-            spanGaps: true
+            spanGaps: true,
+            borderWidth: 2
           }]
         }
       });
-    }
+    } else {
+      const valor = ind.mensual?.[normalizarMes(mes.value)] ?? null;
 
-    // 🔹 MES ESPECÍFICO → barra única
-    else {
       window.chart = new Chart(ctx, {
         type: "bar",
         data: {
-          labels: [mes.value.toUpperCase()],
+          labels: [mes.value],
           datasets: [{
             label: nombre,
-            data: [ind.mensual?.[mes.value] ?? null]
+            data: [valor]
           }]
         }
       });
     }
 
     document.getElementById("modalTitulo").textContent =
-      `${nombre} – ${mes.value.toUpperCase()}`;
+      `${nombre} – ${mes.value}`;
 
     new bootstrap.Modal(document.getElementById("modalGrafico")).show();
   };
 
+  // =========================
+  // EXPORTAR
+  // =========================
   btnVista.addEventListener("click", async () => {
     const canvas = await html2canvas(
       document.getElementById("vista-exportable"),
@@ -185,6 +210,9 @@ document.addEventListener("DOMContentLoaded", () => {
     XLSX.writeFile(wb, `Atencion_Cerrada_${anio.value}.xlsx`);
   });
 
+  // =========================
+  // INICIO
+  // =========================
   async function iniciar() {
     dataActual = await cargarJSON(anio.value);
     dataComparar = await cargarJSON(anio.value === "2025" ? "2024" : "2025");
