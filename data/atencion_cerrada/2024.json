@@ -9,198 +9,1427 @@
       "indicadores": [
         {
           "glosa": "Dias Cama Disponibles",
-          "unidad": "días",
           "acumulado": 35440,
           "mensual": {
-            "enero": 2885, "febrero": 2755, "marzo": 2949, "abril": 2902,
-            "mayo": 2986, "junio": 2856, "julio": 3027, "agosto": 3094,
-            "septiembre": 2935, "octubre": 3082, "noviembre": 2891, "diciembre": 3078
+            "enero": 2885,
+            "febrero": 2755,
+            "marzo": 2949,
+            "abril": 2902,
+            "mayo": 2986,
+            "junio": 2856,
+            "julio": 3027,
+            "agosto": 3094,
+            "septiembre": 2935,
+            "octubre": 3082,
+            "noviembre": 2891,
+            "diciembre": 3078
           }
         },
         {
           "glosa": "Dias Cama Ocupados",
-          "unidad": "días",
           "acumulado": 27402,
           "mensual": {
-            "enero": 2207, "febrero": 2040, "marzo": 2270, "abril": 2240,
-            "mayo": 2251, "junio": 2041, "julio": 2380, "agosto": 2586,
-            "septiembre": 2444, "octubre": 2392, "noviembre": 2227, "diciembre": 2324
+            "enero": 2207,
+            "febrero": 2040,
+            "marzo": 2270,
+            "abril": 2240,
+            "mayo": 2251,
+            "junio": 2041,
+            "julio": 2380,
+            "agosto": 2586,
+            "septiembre": 2444,
+            "octubre": 2392,
+            "noviembre": 2227,
+            "diciembre": 2324
           }
         },
         {
-          "glosa": "Indice Ocupacional",
-          "unidad": "%",
-          "acumulado": 77.32,
+          "glosa": "Dias de Estada",
+          "acumulado": 27134,
           "mensual": {
-            "enero": 76.5, "febrero": 74.05, "marzo": 76.98, "abril": 77.19,
-            "mayo": 75.39, "junio": 71.46, "julio": 78.63, "agosto": 83.58,
-            "septiembre": 83.27, "octubre": 77.61, "noviembre": 77.03, "diciembre": 75.5
+            "enero": 2207,
+            "febrero": 1892,
+            "marzo": 2163,
+            "abril": 2554,
+            "mayo": 2194,
+            "junio": 2027,
+            "julio": 2206,
+            "agosto": 2761,
+            "septiembre": 2034,
+            "octubre": 2488,
+            "noviembre": 2295,
+            "diciembre": 2313
           }
         },
         {
-          "glosa": "Promedio Días de Estada",
-          "unidad": "días",
-          "acumulado": 5.44,
+          "glosa": "Promedio Cama Disponibles",
+          "acumulado": 96.83,
           "mensual": {
-            "enero": 5.41, "febrero": 5.05, "marzo": 5.3, "abril": 5.83,
-            "mayo": 5.25, "junio": 4.84, "julio": 5.5, "agosto": 6.26,
-            "septiembre": 5.26, "octubre": 5.91, "noviembre": 5.64, "diciembre": 4.93
+            "enero": 93.06,
+            "febrero": 95,
+            "marzo": 95.13,
+            "abril": 96.73,
+            "mayo": 96.32,
+            "junio": 95.2,
+            "julio": 97.65,
+            "agosto": 99.81,
+            "septiembre": 97.83,
+            "octubre": 99.42,
+            "noviembre": 96.37,
+            "diciembre": 99.29
           }
         },
         {
           "glosa": "Numero de Egresos",
-          "unidad": "casos",
           "acumulado": 4992,
           "mensual": {
-            "enero": 408, "febrero": 375, "marzo": 408, "abril": 438,
-            "mayo": 418, "junio": 419, "julio": 401, "agosto": 441,
-            "septiembre": 387, "octubre": 421, "noviembre": 407, "diciembre": 469
+            "enero": 408,
+            "febrero": 375,
+            "marzo": 408,
+            "abril": 438,
+            "mayo": 418,
+            "junio": 419,
+            "julio": 401,
+            "agosto": 441,
+            "septiembre": 387,
+            "octubre": 421,
+            "noviembre": 407,
+            "diciembre": 469
           }
         },
         {
           "glosa": "Egresos Fallecidos",
-          "unidad": "casos",
           "acumulado": 191,
           "mensual": {
-            "enero": 15, "febrero": 15, "marzo": 18, "abril": 11,
-            "mayo": 20, "junio": 16, "julio": 18, "agosto": 20,
-            "septiembre": 18, "octubre": 9, "noviembre": 15, "diciembre": 16
+            "enero": 15,
+            "febrero": 15,
+            "marzo": 18,
+            "abril": 11,
+            "mayo": 20,
+            "junio": 16,
+            "julio": 18,
+            "agosto": 20,
+            "septiembre": 18,
+            "octubre": 9,
+            "noviembre": 15,
+            "diciembre": 16
           }
         },
         {
-          "glosa": "Letalidad",
-          "unidad": "%",
-          "acumulado": 3.83,
-          "mensual": {
-            "enero": 3.68, "febrero": 4, "marzo": 4.41, "abril": 2.51,
-            "mayo": 4.78, "junio": 3.82, "julio": 4.49, "agosto": 4.54,
-            "septiembre": 4.65, "octubre": 2.14, "noviembre": 3.69, "diciembre": 3.41
-          }
-        }
-      ]
-    },
-    {
-      "codigo": 330,
-      "nombre": "Area Pensionado",
-      "indicadores": [
-        {
           "glosa": "Indice Ocupacional",
-          "unidad": "%",
-          "acumulado": 90.57,
+          "acumulado": 77.32,
           "mensual": {
-            "enero": 78.26, "febrero": 97.89, "marzo": 87.23, "abril": 91.53,
-            "mayo": 83.08, "junio": 71.07, "julio": 100, "agosto": 92.74,
-            "septiembre": 89.9, "octubre": 99.22, "noviembre": 98.58, "diciembre": 91.24
+            "enero": 76.5,
+            "febrero": 74.05,
+            "marzo": 76.98,
+            "abril": 77.19,
+            "mayo": 75.39,
+            "junio": 71.46,
+            "julio": 78.63,
+            "agosto": 83.58,
+            "septiembre": 83.27,
+            "octubre": 77.61,
+            "noviembre": 77.03,
+            "diciembre": 75.5
           }
         },
         {
           "glosa": "Promedio Días de Estada",
-          "unidad": "días",
-          "acumulado": 3.09,
+          "acumulado": 5.44,
           "mensual": {
-            "enero": 3.59, "febrero": 9.71, "marzo": 6.31, "abril": 3.11,
-            "mayo": 2.93, "junio": 1.88, "julio": 3.17, "agosto": 2.68,
-            "septiembre": 2.03, "octubre": 2.71, "noviembre": 3.7, "diciembre": 2.63
+            "enero": 5.41,
+            "febrero": 5.05,
+            "marzo": 5.3,
+            "abril": 5.83,
+            "mayo": 5.25,
+            "junio": 4.84,
+            "julio": 5.5,
+            "agosto": 6.26,
+            "septiembre": 5.26,
+            "octubre": 5.91,
+            "noviembre": 5.64,
+            "diciembre": 4.93
+          }
+        },
+        {
+          "glosa": "Letalidad",
+          "acumulado": 3.83,
+          "mensual": {
+            "enero": 3.68,
+            "febrero": 4,
+            "marzo": 4.41,
+            "abril": 2.51,
+            "mayo": 4.78,
+            "junio": 3.82,
+            "julio": 4.49,
+            "agosto": 4.54,
+            "septiembre": 4.65,
+            "octubre": 2.14,
+            "noviembre": 3.69,
+            "diciembre": 3.41
           }
         }
       ]
     },
     {
-      "codigo": 403,
-      "nombre": "Área Médico-Quirúrgico Cuidados Básicos",
-      "indicadores": [
-        {
-          "glosa": "Indice Ocupacional",
-          "unidad": "%",
-          "acumulado": 83.81,
-          "mensual": {
-            "enero": 86.73, "febrero": 85.41, "marzo": 82.85, "abril": 86.92,
-            "mayo": 83.31, "junio": 83.68, "julio": 79.34, "agosto": 87.73,
-            "septiembre": 82.86, "octubre": 79.64, "noviembre": 79.82, "diciembre": 88.24
-          }
-        }
-      ]
+  "codigo": 330,
+  "nombre": "Area Pensionado",
+  "indicadores": [
+    {
+      "glosa": "Dias Cama Disponibles",
+      "unidad": "días",
+      "acumulado": 1431,
+      "mensual": {
+        "enero": 92,
+        "febrero": 95,
+        "marzo": 94,
+        "abril": 118,
+        "mayo": 130,
+        "junio": 121,
+        "julio": 152,
+        "agosto": 124,
+        "septiembre": 99,
+        "octubre": 128,
+        "noviembre": 141,
+        "diciembre": 137
+      }
     },
     {
-      "codigo": 404,
-      "nombre": "Área Médico-Quirúrgico Cuidados Medios",
-      "indicadores": [
-        {
-          "glosa": "Indice Ocupacional",
-          "unidad": "%",
-          "acumulado": 90.68,
-          "mensual": {
-            "enero": 91.75, "febrero": 89.35, "marzo": 90.59, "abril": 94.42,
-            "mayo": 93.99, "junio": 83.89, "julio": 89.73, "agosto": 92.47,
-            "septiembre": 94.72, "octubre": 84.37, "noviembre": 97.29, "diciembre": 86.73
-          }
-        }
-      ]
+      "glosa": "Dias Cama Ocupados",
+      "unidad": "días",
+      "acumulado": 1296,
+      "mensual": {
+        "enero": 72,
+        "febrero": 93,
+        "marzo": 82,
+        "abril": 108,
+        "mayo": 108,
+        "junio": 86,
+        "julio": 152,
+        "agosto": 115,
+        "septiembre": 89,
+        "octubre": 127,
+        "noviembre": 139,
+        "diciembre": 125
+      }
     },
     {
-      "codigo": 407,
-      "nombre": "Área Médica Pediátrica Cuidados Básicos",
-      "indicadores": [
-        {
-          "glosa": "Indice Ocupacional",
-          "unidad": "%",
-          "acumulado": 34.24,
-          "mensual": {
-            "enero": 45.65, "febrero": 10.26, "marzo": 19.57, "abril": 26.67,
-            "mayo": 36.56, "junio": 44.71, "julio": 31.82, "agosto": 30.11,
-            "septiembre": 64.37, "octubre": 47.06, "noviembre": 30, "diciembre": 23.66
-          }
-        }
-      ]
+      "glosa": "Dias de Estada",
+      "unidad": "días",
+      "acumulado": 1151,
+      "mensual": {
+        "enero": 97,
+        "febrero": 68,
+        "marzo": 101,
+        "abril": 112,
+        "mayo": 132,
+        "junio": 77,
+        "julio": 114,
+        "agosto": 126,
+        "septiembre": 59,
+        "octubre": 65,
+        "noviembre": 100,
+        "diciembre": 100
+      }
     },
     {
-      "codigo": 408,
-      "nombre": "Área Médica Pediátrica Cuidados Medios",
-      "indicadores": [
-        {
-          "glosa": "Indice Ocupacional",
-          "unidad": "%",
-          "acumulado": 55.1,
-          "mensual": {
-            "enero": 31.87, "febrero": 32.18, "marzo": 41.49, "abril": 62.22,
-            "mayo": 43.81, "junio": 62.92, "julio": 65.31, "agosto": 65.59,
-            "septiembre": 87.91, "octubre": 72.34, "noviembre": 51.61, "diciembre": 44.09
-          }
-        }
-      ]
+      "glosa": "Promedio Cama Disponibles",
+      "acumulado": 3.91,
+      "mensual": {
+        "enero": 2.97,
+        "febrero": 3.28,
+        "marzo": 3.03,
+        "abril": 3.93,
+        "mayo": 4.19,
+        "junio": 4.03,
+        "julio": 4.9,
+        "agosto": 4,
+        "septiembre": 3.3,
+        "octubre": 4.13,
+        "noviembre": 4.7,
+        "diciembre": 4.42
+      }
     },
     {
-      "codigo": 413,
-      "nombre": "Área Neonatología Cuidados Básicos",
-      "indicadores": [
-        {
-          "glosa": "Indice Ocupacional",
-          "unidad": "%",
-          "acumulado": 30.94,
-          "mensual": {
-            "enero": 45.16, "febrero": 23.28, "marzo": 48.39, "abril": 29.17,
-            "mayo": 27.42, "junio": 20, "julio": 55.65, "agosto": 30.65,
-            "septiembre": 22.5, "octubre": 19.35, "noviembre": 10, "diciembre": 37.9
-          }
-        }
-      ]
+      "glosa": "Numero de Egresos",
+      "unidad": "casos",
+      "acumulado": 373,
+      "mensual": {
+        "enero": 27,
+        "febrero": 7,
+        "marzo": 16,
+        "abril": 36,
+        "mayo": 45,
+        "junio": 41,
+        "julio": 36,
+        "agosto": 47,
+        "septiembre": 29,
+        "octubre": 24,
+        "noviembre": 27,
+        "diciembre": 38
+      }
     },
     {
-      "codigo": 416,
-      "nombre": "Área Obstetricia",
-      "indicadores": [
-        {
-          "glosa": "Indice Ocupacional",
-          "unidad": "%",
-          "acumulado": 55,
-          "mensual": {
-            "enero": 50.95, "febrero": 50.73, "marzo": 60.89, "abril": 46.55,
-            "mayo": 46.95, "junio": 45.92, "julio": 58.02, "agosto": 75.63,
-            "septiembre": 69.3, "octubre": 68.92, "noviembre": 51.4, "diciembre": 50.53
-          }
-        }
-      ]
+      "glosa": "Egresos Fallecidos",
+      "unidad": "casos",
+      "acumulado": 9,
+      "mensual": {
+        "enero": 0,
+        "febrero": 1,
+        "marzo": 1,
+        "abril": 3,
+        "mayo": 1,
+        "junio": 0,
+        "julio": 1,
+        "agosto": 1,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 1,
+        "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Indice Ocupacional",
+      "unidad": "%",
+      "acumulado": 90.57,
+      "mensual": {
+        "enero": 78.26,
+        "febrero": 97.89,
+        "marzo": 87.23,
+        "abril": 91.53,
+        "mayo": 83.08,
+        "junio": 71.07,
+        "julio": 100,
+        "agosto": 92.74,
+        "septiembre": 89.9,
+        "octubre": 99.22,
+        "noviembre": 98.58,
+        "diciembre": 91.24
+      }
+    },
+    {
+      "glosa": "Promedio Días de Estada",
+      "unidad": "días",
+      "acumulado": 3.09,
+      "mensual": {
+        "enero": 3.59,
+        "febrero": 9.71,
+        "marzo": 6.31,
+        "abril": 3.11,
+        "mayo": 2.93,
+        "junio": 1.88,
+        "julio": 3.17,
+        "agosto": 2.68,
+        "septiembre": 2.03,
+        "octubre": 2.71,
+        "noviembre": 3.7,
+        "diciembre": 2.63
+      }
+    },
+    {
+      "glosa": "Letalidad",
+      "unidad": "%",
+      "acumulado": 2.41,
+      "mensual": {
+        "enero": 0,
+        "febrero": 14.29,
+        "marzo": 6.25,
+        "abril": 8.33,
+        "mayo": 2.22,
+        "junio": 0,
+        "julio": 2.78,
+        "agosto": 2.13,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 3.7,
+        "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Traslados",
+      "unidad": "casos",
+      "acumulado": 94,
+      "mensual": {
+        "enero": 11,
+        "febrero": 8,
+        "marzo": 5,
+        "abril": 7,
+        "mayo": 8,
+        "junio": 9,
+        "julio": 10,
+        "agosto": 11,
+        "septiembre": 3,
+        "octubre": 9,
+        "noviembre": 8,
+        "diciembre": 5
+      }
+    }
+  ]
+},
+{
+  "codigo": 403,
+  "nombre": "Área Médico-Quirúrgico Cuidados Básicos",
+  "indicadores": [
+    {
+      "glosa": "Dias Cama Disponibles",
+      "unidad": "días",
+      "acumulado": 10063,
+      "mensual": {
+        "enero": 746,
+        "febrero": 740,
+        "marzo": 793,
+        "abril": 772,
+        "mayo": 779,
+        "junio": 760,
+        "julio": 963,
+        "agosto": 1027,
+        "septiembre": 1027,
+        "octubre": 889,
+        "noviembre": 768,
+        "diciembre": 799
+      }
+    },
+    {
+      "glosa": "Dias Cama Ocupados",
+      "unidad": "días",
+      "acumulado": 8434,
+      "mensual": {
+        "enero": 647,
+        "febrero": 632,
+        "marzo": 657,
+        "abril": 671,
+        "mayo": 649,
+        "junio": 636,
+        "julio": 764,
+        "agosto": 901,
+        "septiembre": 851,
+        "octubre": 708,
+        "noviembre": 613,
+        "diciembre": 705
+      }
+    },
+    {
+      "glosa": "Dias de Estada",
+      "unidad": "días",
+      "acumulado": 8307,
+      "mensual": {
+        "enero": 659,
+        "febrero": 583,
+        "marzo": 653,
+        "abril": 746,
+        "mayo": 620,
+        "junio": 510,
+        "julio": 760,
+        "agosto": 979,
+        "septiembre": 662,
+        "octubre": 785,
+        "noviembre": 699,
+        "diciembre": 651
+      }
+    },
+    {
+      "glosa": "Promedio Cama Disponibles",
+      "acumulado": 27.49,
+      "mensual": {
+        "enero": 24.06,
+        "febrero": 25.52,
+        "marzo": 25.58,
+        "abril": 25.73,
+        "mayo": 25.13,
+        "junio": 25.33,
+        "julio": 31.06,
+        "agosto": 33.13,
+        "septiembre": 34.23,
+        "octubre": 28.68,
+        "noviembre": 25.6,
+        "diciembre": 25.77
+      }
+    },
+    {
+      "glosa": "Numero de Egresos",
+      "unidad": "casos",
+      "acumulado": 1458,
+      "mensual": {
+        "enero": 111,
+        "febrero": 119,
+        "marzo": 130,
+        "abril": 144,
+        "mayo": 112,
+        "junio": 111,
+        "julio": 108,
+        "agosto": 140,
+        "septiembre": 122,
+        "octubre": 111,
+        "noviembre": 119,
+        "diciembre": 131
+      }
+    },
+    {
+      "glosa": "Egresos Fallecidos",
+      "unidad": "casos",
+      "acumulado": 37,
+      "mensual": {
+        "enero": 1,
+        "febrero": 5,
+        "marzo": 2,
+        "abril": 2,
+        "mayo": 3,
+        "junio": 4,
+        "julio": 3,
+        "agosto": 4,
+        "septiembre": 4,
+        "octubre": 1,
+        "noviembre": 4,
+        "diciembre": 4
+      }
+    },
+    {
+      "glosa": "Indice Ocupacional",
+      "unidad": "%",
+      "acumulado": 83.81,
+      "mensual": {
+        "enero": 86.73,
+        "febrero": 85.41,
+        "marzo": 82.85,
+        "abril": 86.92,
+        "mayo": 83.31,
+        "junio": 83.68,
+        "julio": 79.34,
+        "agosto": 87.73,
+        "septiembre": 82.86,
+        "octubre": 79.64,
+        "noviembre": 79.82,
+        "diciembre": 88.24
+      }
+    },
+    {
+      "glosa": "Promedio Días de Estada",
+      "unidad": "días",
+      "acumulado": 5.7,
+      "mensual": {
+        "enero": 5.94,
+        "febrero": 4.9,
+        "marzo": 5.02,
+        "abril": 5.18,
+        "mayo": 5.54,
+        "junio": 4.59,
+        "julio": 7.04,
+        "agosto": 6.99,
+        "septiembre": 5.43,
+        "octubre": 7.07,
+        "noviembre": 5.87,
+        "diciembre": 4.97
+      }
+    },
+    {
+      "glosa": "Indice de Rotación",
+      "acumulado": null,
+      "mensual": {
+        "enero": 5.78,
+        "febrero": 5.64,
+        "marzo": 6.25,
+        "abril": 6.26,
+        "mayo": 5.13,
+        "junio": 5.17,
+        "julio": 4.15,
+        "agosto": 4.98,
+        "septiembre": 4.47,
+        "octubre": 4.74,
+        "noviembre": 5.27,
+        "diciembre": 5.74
+      }
+    },
+    {
+      "glosa": "Letalidad",
+      "unidad": "%",
+      "acumulado": 2.54,
+      "mensual": {
+        "enero": 0.9,
+        "febrero": 4.2,
+        "marzo": 1.54,
+        "abril": 1.39,
+        "mayo": 2.68,
+        "junio": 3.6,
+        "julio": 2.78,
+        "agosto": 2.86,
+        "septiembre": 3.28,
+        "octubre": 0.9,
+        "noviembre": 3.36,
+        "diciembre": 3.05
+      }
+    },
+    {
+      "glosa": "Traslados",
+      "unidad": "casos",
+      "acumulado": 272,
+      "mensual": {
+        "enero": 28,
+        "febrero": 25,
+        "marzo": 30,
+        "abril": 17,
+        "mayo": 17,
+        "junio": 20,
+        "julio": 21,
+        "agosto": 25,
+        "septiembre": 31,
+        "octubre": 25,
+        "noviembre": 16,
+        "diciembre": 17
+      }
+    }
+  ]
+},
+ {
+  "codigo": 404,
+  "nombre": "Área Médico-Quirúrgico Cuidados Medios",
+  "indicadores": [
+    {
+      "glosa": "Dias Cama Disponibles",
+      "unidad": "días",
+      "acumulado": 14222,
+      "mensual": {
+        "enero": 1163,
+        "febrero": 1089,
+        "marzo": 1169,
+        "abril": 1147,
+        "mayo": 1182,
+        "junio": 1130,
+        "julio": 1178,
+        "agosto": 1235,
+        "septiembre": 1156,
+        "octubre": 1363,
+        "noviembre": 1144,
+        "diciembre": 1266
+      }
+    },
+    {
+      "glosa": "Dias Cama Ocupados",
+      "unidad": "días",
+      "acumulado": 12896,
+      "mensual": {
+        "enero": 1067,
+        "febrero": 973,
+        "marzo": 1059,
+        "abril": 1083,
+        "mayo": 1111,
+        "junio": 948,
+        "julio": 1057,
+        "agosto": 1142,
+        "septiembre": 1095,
+        "octubre": 1150,
+        "noviembre": 1113,
+        "diciembre": 1098
+      }
+    },
+    {
+      "glosa": "Dias de Estada",
+      "unidad": "días",
+      "acumulado": 12848,
+      "mensual": {
+        "enero": 998,
+        "febrero": 881,
+        "marzo": 982,
+        "abril": 1306,
+        "mayo": 1040,
+        "junio": 1045,
+        "julio": 941,
+        "agosto": 1223,
+        "septiembre": 942,
+        "octubre": 1218,
+        "noviembre": 1105,
+        "diciembre": 1167
+      }
+    },
+    {
+      "glosa": "Promedio Cama Disponibles",
+      "acumulado": 38.86,
+      "mensual": {
+        "enero": 37.52,
+        "febrero": 37.55,
+        "marzo": 37.71,
+        "abril": 38.23,
+        "mayo": 38.13,
+        "junio": 37.67,
+        "julio": 38,
+        "agosto": 39.84,
+        "septiembre": 38.53,
+        "octubre": 43.97,
+        "noviembre": 38.13,
+        "diciembre": 40.84
+      }
+    },
+    {
+      "glosa": "Numero de Egresos",
+      "unidad": "casos",
+      "acumulado": 1733,
+      "mensual": {
+        "enero": 151,
+        "febrero": 129,
+        "marzo": 122,
+        "abril": 143,
+        "mayo": 134,
+        "junio": 144,
+        "julio": 147,
+        "agosto": 138,
+        "septiembre": 139,
+        "octubre": 170,
+        "noviembre": 146,
+        "diciembre": 170
+      }
+    },
+    {
+      "glosa": "Egresos Fallecidos",
+      "unidad": "casos",
+      "acumulado": 145,
+      "mensual": {
+        "enero": 14,
+        "febrero": 9,
+        "marzo": 15,
+        "abril": 6,
+        "mayo": 16,
+        "junio": 12,
+        "julio": 14,
+        "agosto": 15,
+        "septiembre": 14,
+        "octubre": 8,
+        "noviembre": 10,
+        "diciembre": 12
+      }
+    },
+    {
+      "glosa": "Indice Ocupacional",
+      "unidad": "%",
+      "acumulado": 90.68,
+      "mensual": {
+        "enero": 91.75,
+        "febrero": 89.35,
+        "marzo": 90.59,
+        "abril": 94.42,
+        "mayo": 93.99,
+        "junio": 83.89,
+        "julio": 89.73,
+        "agosto": 92.47,
+        "septiembre": 94.72,
+        "octubre": 84.37,
+        "noviembre": 97.29,
+        "diciembre": 86.73
+      }
+    },
+    {
+      "glosa": "Promedio Días de Estada",
+      "unidad": "días",
+      "acumulado": 7.41,
+      "mensual": {
+        "enero": 6.61,
+        "febrero": 6.83,
+        "marzo": 8.05,
+        "abril": 9.13,
+        "mayo": 7.76,
+        "junio": 7.26,
+        "julio": 6.4,
+        "agosto": 8.86,
+        "septiembre": 6.78,
+        "octubre": 7.16,
+        "noviembre": 7.57,
+        "diciembre": 6.86
+      }
+    },
+    {
+      "glosa": "Indice de Rotación",
+      "acumulado": null,
+      "mensual": {
+        "enero": 4.88,
+        "febrero": 4.26,
+        "marzo": 4.06,
+        "abril": 4.52,
+        "mayo": 4.25,
+        "junio": 4.75,
+        "julio": 5.11,
+        "agosto": 4.37,
+        "septiembre": 4.39,
+        "octubre": 4.55,
+        "noviembre": 4.54,
+        "diciembre": 4.77
+      }
+    },
+    {
+      "glosa": "Letalidad",
+      "unidad": "%",
+      "acumulado": 8.37,
+      "mensual": {
+        "enero": 9.27,
+        "febrero": 6.98,
+        "marzo": 12.3,
+        "abril": 4.2,
+        "mayo": 11.94,
+        "junio": 8.33,
+        "julio": 9.52,
+        "agosto": 10.87,
+        "septiembre": 10.07,
+        "octubre": 4.71,
+        "noviembre": 6.85,
+        "diciembre": 7.06
+      }
+    },
+    {
+      "glosa": "Traslados",
+      "unidad": "casos",
+      "acumulado": 382,
+      "mensual": {
+        "enero": 32,
+        "febrero": 31,
+        "marzo": 31,
+        "abril": 30,
+        "mayo": 28,
+        "junio": 35,
+        "julio": 47,
+        "agosto": 36,
+        "septiembre": 30,
+        "octubre": 30,
+        "noviembre": 27,
+        "diciembre": 25
+      }
+    }
+  ]
+},
+{
+  "codigo": 407,
+  "nombre": "Área Médica Pediátrica Cuidados Básicos",
+  "indicadores": [
+    {
+      "glosa": "Dias Cama Disponibles",
+      "unidad": "días",
+      "acumulado": 1066,
+      "mensual": {
+        "enero": 92,
+        "febrero": 78,
+        "marzo": 92,
+        "abril": 90,
+        "mayo": 93,
+        "junio": 85,
+        "julio": 88,
+        "agosto": 93,
+        "septiembre": 87,
+        "octubre": 85,
+        "noviembre": 90,
+        "diciembre": 93
+      }
+    },
+    {
+      "glosa": "Dias Cama Ocupados",
+      "unidad": "días",
+      "acumulado": 365,
+      "mensual": {
+        "enero": 42,
+        "febrero": 8,
+        "marzo": 18,
+        "abril": 24,
+        "mayo": 34,
+        "junio": 38,
+        "julio": 28,
+        "agosto": 28,
+        "septiembre": 56,
+        "octubre": 40,
+        "noviembre": 27,
+        "diciembre": 22
+      }
+    },
+    {
+      "glosa": "Dias de Estada",
+      "unidad": "días",
+      "acumulado": 373,
+      "mensual": {
+        "enero": 49,
+        "febrero": 8,
+        "marzo": 16,
+        "abril": 25,
+        "mayo": 34,
+        "junio": 39,
+        "julio": 25,
+        "agosto": 24,
+        "septiembre": 44,
+        "octubre": 57,
+        "noviembre": 30,
+        "diciembre": 22
+      }
+    },
+    {
+      "glosa": "Promedio Cama Disponibles",
+      "acumulado": 2.91,
+      "mensual": {
+        "enero": 2.97,
+        "febrero": 2.69,
+        "marzo": 2.97,
+        "abril": 3,
+        "mayo": 3,
+        "junio": 2.83,
+        "julio": 2.84,
+        "agosto": 3,
+        "septiembre": 2.9,
+        "octubre": 2.74,
+        "noviembre": 3,
+        "diciembre": 3
+      }
+    },
+    {
+      "glosa": "Numero de Egresos",
+      "unidad": "casos",
+      "acumulado": 87,
+      "mensual": {
+        "enero": 2,
+        "febrero": 3,
+        "marzo": 5,
+        "abril": 8,
+        "mayo": 10,
+        "junio": 8,
+        "julio": 8,
+        "agosto": 6,
+        "septiembre": 11,
+        "octubre": 11,
+        "noviembre": 10,
+        "diciembre": 5
+      }
+    },
+    {
+      "glosa": "Egresos Fallecidos",
+      "unidad": "casos",
+      "acumulado": 0,
+      "mensual": {
+        "enero": 0,
+        "febrero": 0,
+        "marzo": 0,
+        "abril": 0,
+        "mayo": 0,
+        "junio": 0,
+        "julio": 0,
+        "agosto": 0,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 0,
+        "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Indice Ocupacional",
+      "unidad": "%",
+      "acumulado": 34.24,
+      "mensual": {
+        "enero": 45.65,
+        "febrero": 10.26,
+        "marzo": 19.57,
+        "abril": 26.67,
+        "mayo": 36.56,
+        "junio": 44.71,
+        "julio": 31.82,
+        "agosto": 30.11,
+        "septiembre": 64.37,
+        "octubre": 47.06,
+        "noviembre": 30,
+        "diciembre": 23.66
+      }
+    },
+    {
+      "glosa": "Promedio Días de Estada",
+      "unidad": "días",
+      "acumulado": 4.29,
+      "mensual": {
+        "enero": 24.5,
+        "febrero": 2.67,
+        "marzo": 3.2,
+        "abril": 3.13,
+        "mayo": 3.4,
+        "junio": 4.88,
+        "julio": 3.13,
+        "agosto": 4,
+        "septiembre": 4,
+        "octubre": 5.18,
+        "noviembre": 3,
+        "diciembre": 4.4
+      }
+    },
+    {
+      "glosa": "Indice de Rotación",
+      "acumulado": null,
+      "mensual": {
+        "enero": 1.35,
+        "febrero": 1.12,
+        "marzo": 1.68,
+        "abril": 3,
+        "mayo": 4,
+        "junio": 4.24,
+        "julio": 4.23,
+        "agosto": 2,
+        "septiembre": 4.48,
+        "octubre": 4.38,
+        "noviembre": 3.67,
+        "diciembre": 2
+      }
+    },
+    {
+      "glosa": "Letalidad",
+      "unidad": "%",
+      "acumulado": 0,
+      "mensual": {
+        "enero": 0,
+        "febrero": 0,
+        "marzo": 0,
+        "abril": 0,
+        "mayo": 0,
+        "junio": 0,
+        "julio": 0,
+        "agosto": 0,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 0,
+        "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Traslados",
+      "unidad": "casos",
+      "acumulado": 18,
+      "mensual": {
+        "enero": 2,
+        "febrero": 0,
+        "marzo": 0,
+        "abril": 1,
+        "mayo": 2,
+        "junio": 4,
+        "julio": 4,
+        "agosto": 0,
+        "septiembre": 2,
+        "octubre": 1,
+        "noviembre": 1,
+        "diciembre": 1
+      }
+    }
+  ]
+},
+{
+  "codigo": 408,
+  "nombre": "Área Médica Pediátrica Cuidados Medios",
+  "indicadores": [
+    {
+      "glosa": "Dias Cama Disponibles",
+      "unidad": "días",
+      "acumulado": 1118,
+      "mensual": {
+        "enero": 91,
+        "febrero": 87,
+        "marzo": 94,
+        "abril": 90,
+        "mayo": 105,
+        "junio": 89,
+        "julio": 98,
+        "agosto": 93,
+        "septiembre": 91,
+        "octubre": 94,
+        "noviembre": 93,
+        "diciembre": 93
+      }
+    },
+    {
+      "glosa": "Dias Cama Ocupados",
+      "unidad": "días",
+      "acumulado": 616,
+      "mensual": {
+        "enero": 29,
+        "febrero": 28,
+        "marzo": 39,
+        "abril": 56,
+        "mayo": 46,
+        "junio": 56,
+        "julio": 64,
+        "agosto": 61,
+        "septiembre": 80,
+        "octubre": 68,
+        "noviembre": 48,
+        "diciembre": 41
+      }
+    },
+    {
+      "glosa": "Dias de Estada",
+      "unidad": "días",
+      "acumulado": 633,
+      "mensual": {
+        "enero": 50,
+        "febrero": 25,
+        "marzo": 33,
+        "abril": 64,
+        "mayo": 42,
+        "junio": 52,
+        "julio": 72,
+        "agosto": 52,
+        "septiembre": 54,
+        "octubre": 100,
+        "noviembre": 47,
+        "diciembre": 42
+      }
+    },
+    {
+      "glosa": "Promedio Cama Disponibles",
+      "acumulado": 3.05,
+      "mensual": {
+        "enero": 2.94,
+        "febrero": 3,
+        "marzo": 3.03,
+        "abril": 3,
+        "mayo": 3.39,
+        "junio": 2.97,
+        "julio": 3.16,
+        "agosto": 3,
+        "septiembre": 3.03,
+        "octubre": 3.03,
+        "noviembre": 3.1,
+        "diciembre": 3
+      }
+    },
+    {
+      "glosa": "Numero de Egresos",
+      "unidad": "casos",
+      "acumulado": 129,
+      "mensual": {
+        "enero": 6,
+        "febrero": 6,
+        "marzo": 7,
+        "abril": 12,
+        "mayo": 10,
+        "junio": 12,
+        "julio": 11,
+        "agosto": 12,
+        "septiembre": 8,
+        "octubre": 21,
+        "noviembre": 12,
+        "diciembre": 12
+      }
+    },
+    {
+      "glosa": "Egresos Fallecidos",
+      "unidad": "casos",
+      "acumulado": 0,
+      "mensual": {
+        "enero": 0,
+        "febrero": 0,
+        "marzo": 0,
+        "abril": 0,
+        "mayo": 0,
+        "junio": 0,
+        "julio": 0,
+        "agosto": 0,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 0,
+        "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Indice Ocupacional",
+      "unidad": "%",
+      "acumulado": 55.1,
+      "mensual": {
+        "enero": 31.87,
+        "febrero": 32.18,
+        "marzo": 41.49,
+        "abril": 62.22,
+        "mayo": 43.81,
+        "junio": 62.92,
+        "julio": 65.31,
+        "agosto": 65.59,
+        "septiembre": 87.91,
+        "octubre": 72.34,
+        "noviembre": 51.61,
+        "diciembre": 44.09
+      }
+    },
+    {
+      "glosa": "Promedio Días de Estada",
+      "unidad": "días",
+      "acumulado": 4.91,
+      "mensual": {
+        "enero": 8.33,
+        "febrero": 4.17,
+        "marzo": 4.71,
+        "abril": 5.33,
+        "mayo": 4.2,
+        "junio": 4.33,
+        "julio": 6.55,
+        "agosto": 4.33,
+        "septiembre": 6.75,
+        "octubre": 4.76,
+        "noviembre": 3.92,
+        "diciembre": 3.5
+      }
+    },
+    {
+      "glosa": "Indice de Rotación",
+      "acumulado": null,
+      "mensual": {
+        "enero": 3.41,
+        "febrero": 2.67,
+        "marzo": 3.63,
+        "abril": 4.67,
+        "mayo": 5.61,
+        "junio": 7.75,
+        "julio": 7.28,
+        "agosto": 5.33,
+        "septiembre": 4.95,
+        "octubre": 7.59,
+        "noviembre": 5.81,
+        "diciembre": 6
+      }
+    },
+    {
+      "glosa": "Letalidad",
+      "unidad": "%",
+      "acumulado": 0,
+      "mensual": {
+        "enero": 0,
+        "febrero": 0,
+        "marzo": 0,
+        "abril": 0,
+        "mayo": 0,
+        "junio": 0,
+        "julio": 0,
+        "agosto": 0,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 0,
+        "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Traslados",
+      "unidad": "casos",
+      "acumulado": 69,
+      "mensual": {
+        "enero": 4,
+        "febrero": 2,
+        "marzo": 4,
+        "abril": 2,
+        "mayo": 9,
+        "junio": 11,
+        "julio": 12,
+        "agosto": 4,
+        "septiembre": 7,
+        "octubre": 2,
+        "noviembre": 6,
+        "diciembre": 6
+      }
+    }
+  ]
+},
+{
+  "codigo": 416,
+  "nombre": "Área Obstetricia",
+  "indicadores": [
+    {
+      "glosa": "Dias Cama Disponibles",
+      "unidad": "días",
+      "acumulado": 6076,
+      "mensual": {
+        "enero": 577,
+        "febrero": 550,
+        "marzo": 583,
+        "abril": 565,
+        "mayo": 573,
+        "junio": 551,
+        "julio": 424,
+        "agosto": 398,
+        "septiembre": 355,
+        "octubre": 399,
+        "noviembre": 535,
+        "diciembre": 566
+      }
+    },
+    {
+      "glosa": "Dias Cama Ocupados",
+      "unidad": "días",
+      "acumulado": 3342,
+      "mensual": {
+        "enero": 294,
+        "febrero": 279,
+        "marzo": 355,
+        "abril": 263,
+        "mayo": 269,
+        "junio": 253,
+        "julio": 246,
+        "agosto": 301,
+        "septiembre": 246,
+        "octubre": 275,
+        "noviembre": 275,
+        "diciembre": 286
+      }
+    },
+    {
+      "glosa": "Dias de Estada",
+      "unidad": "días",
+      "acumulado": 3339,
+      "mensual": {
+        "enero": 264,
+        "febrero": 301,
+        "marzo": 317,
+        "abril": 266,
+        "mayo": 296,
+        "junio": 275,
+        "julio": 229,
+        "agosto": 317,
+        "septiembre": 246,
+        "octubre": 241,
+        "noviembre": 300,
+        "diciembre": 287
+      }
+    },
+    {
+      "glosa": "Promedio Cama Disponibles",
+      "acumulado": 16.6,
+      "mensual": {
+        "enero": 18.61,
+        "febrero": 18.97,
+        "marzo": 18.81,
+        "abril": 18.83,
+        "mayo": 18.48,
+        "junio": 18.37,
+        "julio": 13.68,
+        "agosto": 12.84,
+        "septiembre": 11.83,
+        "octubre": 12.87,
+        "noviembre": 17.83,
+        "diciembre": 18.26
+      }
+    },
+    {
+      "glosa": "Numero de Egresos",
+      "unidad": "casos",
+      "acumulado": 1070,
+      "mensual": {
+        "enero": 98,
+        "febrero": 98,
+        "marzo": 114,
+        "abril": 85,
+        "mayo": 93,
+        "junio": 96,
+        "julio": 76,
+        "agosto": 84,
+        "septiembre": 69,
+        "octubre": 75,
+        "noviembre": 85,
+        "diciembre": 97
+      }
+    },
+    {
+      "glosa": "Egresos Fallecidos",
+      "unidad": "casos",
+      "acumulado": 0,
+      "mensual": {
+        "enero": 0,
+        "febrero": 0,
+        "marzo": 0,
+        "abril": 0,
+        "mayo": 0,
+        "junio": 0,
+        "julio": 0,
+        "agosto": 0,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 0,
+        "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Indice Ocupacional",
+      "unidad": "%",
+      "acumulado": 55,
+      "mensual": {
+        "enero": 50.95,
+        "febrero": 50.73,
+        "marzo": 60.89,
+        "abril": 46.55,
+        "mayo": 46.95,
+        "junio": 45.92,
+        "julio": 58.02,
+        "agosto": 75.63,
+        "septiembre": 69.3,
+        "octubre": 68.92,
+        "noviembre": 51.4,
+        "diciembre": 50.53
+      }
+    },
+    {
+      "glosa": "Promedio Días de Estada",
+      "unidad": "días",
+      "acumulado": 3.12,
+      "mensual": {
+        "enero": 2.69,
+        "febrero": 3.07,
+        "marzo": 2.78,
+        "abril": 3.13,
+        "mayo": 3.18,
+        "junio": 2.86,
+        "julio": 3.01,
+        "agosto": 3.77,
+        "septiembre": 3.57,
+        "octubre": 3.21,
+        "noviembre": 3.53,
+        "diciembre": 2.96
+      }
+    },
+    {
+      "glosa": "Indice de Rotación",
+      "acumulado": null,
+      "mensual": {
+        "enero": 5.59,
+        "febrero": 5.22,
+        "marzo": 6.17,
+        "abril": 5.26,
+        "mayo": 5.9,
+        "junio": 6.04,
+        "julio": 6.73,
+        "agosto": 7.24,
+        "septiembre": 6.25,
+        "octubre": 6.76,
+        "noviembre": 5.27,
+        "diciembre": 6.13
+      }
+    },
+    {
+      "glosa": "Letalidad",
+      "unidad": "%",
+      "acumulado": 0,
+      "mensual": {
+        "enero": 0,
+        "febrero": 0,
+        "marzo": 0,
+        "abril": 0,
+        "mayo": 0,
+        "junio": 0,
+        "julio": 0,
+        "agosto": 0,
+        "septiembre": 0,
+        "octubre": 0,
+        "noviembre": 0,
+        "diciembre": 0
+      }
+    },
+    {
+      "glosa": "Traslados",
+      "unidad": "casos",
+      "acumulado": 120,
+      "mensual": {
+        "enero": 6,
+        "febrero": 1,
+        "marzo": 2,
+        "abril": 14,
+        "mayo": 16,
+        "junio": 15,
+        "julio": 16,
+        "agosto": 9,
+        "septiembre": 5,
+        "octubre": 12,
+        "noviembre": 9,
+        "diciembre": 15
+      }
     }
   ]
 }
-
+  ]
+}
