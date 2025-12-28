@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderKPIs() {
-    contenedor.innerHTML = `<div class="row g-3"></div>`;
+    contenedor.innerHTML = `<div class="kpis"></div>`;
     const grid = contenedor.firstElementChild;
 
     const nivel = dataActual.niveles.find(n => n.codigo == nivelSel.value);
@@ -37,15 +37,13 @@ document.addEventListener("DOMContentLoaded", () => {
         : ind.mensual?.[mesSel.value] ?? "—";
 
       grid.innerHTML += `
-        <div class="col-md-3">
-          <div class="card h-100 shadow-sm text-center p-3">
-            <small class="text-muted">${ind.glosa}</small>
-            <h3 class="fw-bold my-2">${valor} ${ind.unidad ?? ""}</h3>
-            <button class="btn btn-sm btn-outline-primary"
-              onclick="mostrarGrafico('${ind.glosa}')">
-              Ver gráfico
-            </button>
-          </div>
+        <div class="kpi-card">
+          <h3>${ind.glosa}</h3>
+          <span>${valor} ${ind.unidad ?? ""}</span>
+          <button class="btn btn-sm btn-outline-primary mt-2"
+            onclick="mostrarGrafico('${ind.glosa}')">
+            Ver gráfico
+          </button>
         </div>
       `;
     });
@@ -56,7 +54,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderTablaMensual(nivel) {
     const tbody = document.querySelector("#tabla-mensual tbody");
-    const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+    const meses = [
+      "enero","febrero","marzo","abril","mayo","junio",
+      "julio","agosto","septiembre","octubre","noviembre","diciembre"
+    ];
     tbody.innerHTML = "";
 
     nivel.indicadores.forEach(ind => {
@@ -78,14 +79,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const prev = nivelPrev.indicadores.find(i => i.glosa === ind.glosa);
       if (!prev) return;
 
-      const diff = (ind.acumulado ?? 0) - (prev.acumulado ?? 0);
-
       tbody.innerHTML += `
         <tr>
           <th>${ind.glosa}</th>
           <td>${prev.acumulado}</td>
           <td>${ind.acumulado}</td>
-          <td>${diff.toFixed(2)}</td>
+          <td>${(ind.acumulado - prev.acumulado).toFixed(2)}</td>
         </tr>
       `;
     });
@@ -94,14 +93,10 @@ document.addEventListener("DOMContentLoaded", () => {
   window.mostrarGrafico = function (glosa) {
     const nivel = dataActual.niveles.find(n => n.codigo == nivelSel.value);
     const ind = nivel.indicadores.find(i => i.glosa === glosa);
-
-    if (!ind?.mensual) return alert("Este indicador no tiene datos mensuales");
-
-    const ctx = document.getElementById("grafico");
+    if (!ind?.mensual) return;
 
     if (chart) chart.destroy();
-
-    chart = new Chart(ctx, {
+    chart = new Chart(document.getElementById("grafico"), {
       type: "line",
       data: {
         labels: Object.keys(ind.mensual),
@@ -115,6 +110,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("modalTitulo").textContent = glosa;
     new bootstrap.Modal(document.getElementById("modalGrafico")).show();
+  };
+
+  window.exportarVista = function () {
+    html2canvas(document.querySelector("main")).then(canvas => {
+      const link = document.createElement("a");
+      link.download = `Atencion_Cerrada_${anio.value}.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    });
+  };
+
+  window.exportarExcel = function () {
+    const wb = XLSX.utils.book_new();
+    const nivel = dataActual.niveles.find(n => n.codigo == nivelSel.value);
+
+    const kpis = [["Indicador", "Acumulado"]];
+    nivel.indicadores.forEach(i => kpis.push([i.glosa, i.acumulado]));
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(kpis), "KPIs");
+
+    XLSX.writeFile(wb, `Atencion_Cerrada_${anio.value}.xlsx`);
   };
 
   async function iniciar() {
