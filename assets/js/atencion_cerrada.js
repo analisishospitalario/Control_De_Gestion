@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let dataActual = null;
   let dataComparar = null;
 
-  // 🔒 LISTA MAESTRA DE KPIs (garantiza vistas iguales)
+  // 🔒 Lista fija de KPIs (misma vista 2024 / 2025)
   const INDICADORES_BASE = [
     "Dias Cama Disponibles",
     "Dias Cama Ocupados",
@@ -22,12 +22,28 @@ document.addEventListener("DOMContentLoaded", () => {
     "Letalidad"
   ];
 
+  const MESES = [
+    "enero","febrero","marzo","abril","mayo","junio",
+    "julio","agosto","septiembre","octubre","noviembre","diciembre"
+  ];
+
   // =========================
   // CARGA JSON
   // =========================
   async function cargarJSON(anio) {
     const res = await fetch(`../data/atencion_cerrada/${anio}.json`);
     return res.ok ? res.json() : null;
+  }
+
+  // =========================
+  // NORMALIZAR MENSUAL (CLAVE)
+  // =========================
+  function normalizarMensual(ind) {
+    const seguro = {};
+    MESES.forEach(m => {
+      seguro[m] = ind?.mensual?.[m] ?? null;
+    });
+    return seguro;
   }
 
   // =========================
@@ -44,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================
-  // RENDER GENERAL (KPIs)
+  // RENDER KPIs
   // =========================
   function render() {
     contenedor.innerHTML = `<div class="kpis"></div>`;
@@ -62,14 +78,12 @@ document.addEventListener("DOMContentLoaded", () => {
           ? ind.acumulado
           : ind.mensual?.[mes.value] ?? "—";
 
-      const unidad = ind?.unidad ?? "";
-
       grid.innerHTML += `
         <div class="kpi-card">
           <h3>${nombre}</h3>
-          <span>${valor} ${unidad}</span>
+          <span>${valor} ${ind?.unidad ?? ""}</span>
           <button class="btn btn-sm btn-outline-primary mt-2"
-            ${ind?.mensual ? `onclick="mostrarGrafico('${nombre}')"` : "disabled"}>
+            ${ind ? `onclick="mostrarGrafico('${nombre}')"` : "disabled"}>
             Ver gráfico
           </button>
         </div>
@@ -85,14 +99,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   function renderTablaMensual(niv) {
     const tbody = document.querySelector("#tabla-mensual tbody");
-    const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
     tbody.innerHTML = "";
 
     INDICADORES_BASE.forEach(nombre => {
       const ind = niv.indicadores.find(i => i.glosa === nombre);
       let fila = `<tr><th>${nombre}</th>`;
-
-      meses.forEach(m => fila += `<td>${ind?.mensual?.[m] ?? "—"}</td>`);
+      MESES.forEach(m => fila += `<td>${ind?.mensual?.[m] ?? "—"}</td>`);
       fila += "</tr>";
       tbody.innerHTML += fila;
     });
@@ -114,9 +126,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const vAnt = ant?.acumulado ?? "—";
       const vAct = act?.acumulado ?? "—";
-      const diff = (typeof vAnt === "number" && typeof vAct === "number")
-        ? (vAct - vAnt).toFixed(2)
-        : "—";
+      const diff =
+        typeof vAnt === "number" && typeof vAct === "number"
+          ? (vAct - vAnt).toFixed(2)
+          : "—";
 
       tbody.innerHTML += `
         <tr>
@@ -130,12 +143,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================
-  // GRÁFICO
+  // GRÁFICO (SOLUCIONADO)
   // =========================
   window.mostrarGrafico = function (nombre) {
     const niv = dataActual.niveles.find(n => n.codigo == nivel.value);
     const ind = niv.indicadores.find(i => i.glosa === nombre);
-    if (!ind?.mensual) return;
+    if (!ind) return;
+
+    const mensual = normalizarMensual(ind);
 
     const ctx = document.getElementById("grafico");
     if (window.chart) window.chart.destroy();
@@ -143,11 +158,12 @@ document.addEventListener("DOMContentLoaded", () => {
     window.chart = new Chart(ctx, {
       type: "line",
       data: {
-        labels: Object.keys(ind.mensual),
+        labels: MESES.map(m => m.toUpperCase()),
         datasets: [{
           label: nombre,
-          data: Object.values(ind.mensual),
-          borderWidth: 2
+          data: MESES.map(m => mensual[m]),
+          borderWidth: 2,
+          spanGaps: true
         }]
       }
     });
@@ -157,14 +173,13 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // =========================
-  // EXPORTAR VISTA (PNG)
+  // EXPORTAR VISTA
   // =========================
   btnVista.addEventListener("click", async () => {
-    const canvas = await html2canvas(document.getElementById("vista-exportable"), {
-      scale: 2,
-      backgroundColor: "#ffffff"
-    });
-
+    const canvas = await html2canvas(
+      document.getElementById("vista-exportable"),
+      { scale: 2, backgroundColor: "#ffffff" }
+    );
     const link = document.createElement("a");
     link.download = `Atencion_Cerrada_${anio.value}.png`;
     link.href = canvas.toDataURL("image/png");
@@ -178,13 +193,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const wb = XLSX.utils.book_new();
     const niv = dataActual.niveles.find(n => n.codigo == nivel.value);
 
-    const hojaKPIs = [["Indicador", "Acumulado"]];
+    const hoja = [["Indicador", "Acumulado"]];
     INDICADORES_BASE.forEach(nombre => {
       const ind = niv.indicadores.find(i => i.glosa === nombre);
-      hojaKPIs.push([nombre, ind?.acumulado ?? ""]);
+      hoja.push([nombre, ind?.acumulado ?? ""]);
     });
 
-    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(hojaKPIs), "KPIs");
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(hoja), "KPIs");
     XLSX.writeFile(wb, `Atencion_Cerrada_${anio.value}.xlsx`);
   });
 
