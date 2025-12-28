@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const btnVista = document.getElementById("btnExportarVista");
   const btnExcel = document.getElementById("btnExportarExcel");
-
   const ctxGrafico = document.getElementById("grafico");
 
   // =========================
@@ -19,9 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let dataActual = null;
   let dataComparar = null;
   let chartInstance = null;
+  const cacheJSON = {};
 
   // =========================
-  // CONSTANTES
+  // CONSTANTES (ÍNDICE ROTACIÓN ELIMINADO)
   // =========================
   const INDICADORES_BASE = [
     "Dias Cama Disponibles",
@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
     "Egresos Fallecidos",
     "Indice Ocupacional",
     "Promedio Días de Estada",
-    "Indice de Rotación",
     "Letalidad",
     "Traslados"
   ];
@@ -45,15 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   // UTILIDADES
   // =========================
-  const normalizarMes = v => v ? v.toLowerCase() : null;
+  const normalizarMes = v => v?.toLowerCase() ?? null;
 
   async function cargarJSON(anio) {
+    if (cacheJSON[anio]) return cacheJSON[anio];
+
     try {
       const res = await fetch(`../data/atencion_cerrada/${anio}.json`);
       if (!res.ok) return null;
-      return await res.json();
-    } catch (e) {
-      console.error("Error cargando JSON:", e);
+      const data = await res.json();
+      cacheJSON[anio] = data;
+      return data;
+    } catch {
       return null;
     }
   }
@@ -72,8 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // RENDER PRINCIPAL
   // =========================
   function render() {
-    if (!dataActual?.niveles) {
-      contenedor.innerHTML = "<p>No hay datos disponibles</p>";
+    if (!dataActual?.niveles?.length) {
+      contenedor.innerHTML =
+        "<p class='text-muted'>No hay datos cargados para el año seleccionado.</p>";
+      document.querySelector("#tabla-mensual tbody").innerHTML = "";
+      document.querySelector("#tabla-comparativa tbody").innerHTML = "";
       return;
     }
 
@@ -94,27 +99,20 @@ document.addEventListener("DOMContentLoaded", () => {
           ? ind.acumulado
           : ind.mensual?.[normalizarMes(mes.value)] ?? "—";
 
-      const existeDato =
-        ind &&
-        (mes.value === "acumulado" ||
-         ind.mensual?.[normalizarMes(mes.value)] !== undefined);
-
       const card = document.createElement("div");
       card.className = "kpi-card";
-
-      const h3 = document.createElement("h3");
-      h3.textContent = nombre;
-
-      const span = document.createElement("span");
-      span.textContent = `${valor} ${ind?.unidad ?? ""}`;
+      card.innerHTML = `
+        <h3>${nombre}</h3>
+        <span>${valor} ${ind?.unidad ?? ""}</span>
+      `;
 
       const btn = document.createElement("button");
       btn.className = "btn btn-sm btn-outline-primary mt-2";
       btn.textContent = "Ver gráfico";
-      btn.disabled = !existeDato;
-      btn.addEventListener("click", () => mostrarGrafico(nombre));
+      btn.disabled = !ind;
+      btn.onclick = () => mostrarGrafico(nombre);
 
-      card.append(h3, span, btn);
+      card.appendChild(btn);
       fragment.appendChild(card);
     });
 
@@ -134,15 +132,10 @@ document.addEventListener("DOMContentLoaded", () => {
     INDICADORES_BASE.forEach(nombre => {
       const ind = niv.indicadores.find(i => i.glosa === nombre);
       const tr = document.createElement("tr");
-
-      const th = document.createElement("th");
-      th.textContent = nombre;
-      tr.appendChild(th);
+      tr.innerHTML = `<th>${nombre}</th>`;
 
       MESES.forEach(m => {
-        const td = document.createElement("td");
-        td.textContent = ind?.mensual?.[m] ?? "—";
-        tr.appendChild(td);
+        tr.innerHTML += `<td>${ind?.mensual?.[m] ?? "—"}</td>`;
       });
 
       tbody.appendChild(tr);
@@ -163,27 +156,26 @@ document.addEventListener("DOMContentLoaded", () => {
       const act = niv.indicadores.find(i => i.glosa === nombre);
       const ant = prev.indicadores.find(i => i.glosa === nombre);
 
-      const vAnt = ant?.acumulado ?? "—";
-      const vAct = act?.acumulado ?? "—";
+      const vAnt = ant?.acumulado;
+      const vAct = act?.acumulado;
+      const diff =
+        typeof vAnt === "number" && typeof vAct === "number"
+          ? (vAct - vAnt).toFixed(2)
+          : "—";
 
-      let diff = "—";
-      if (typeof vAnt === "number" && typeof vAct === "number") {
-        diff = (vAct - vAnt).toFixed(2);
-      }
-
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <th>${nombre}</th>
-        <td>${vAnt}</td>
-        <td>${vAct}</td>
-        <td>${diff}</td>
+      tbody.innerHTML += `
+        <tr>
+          <th>${nombre}</th>
+          <td>${vAnt ?? "—"}</td>
+          <td>${vAct ?? "—"}</td>
+          <td>${diff}</td>
+        </tr>
       `;
-      tbody.appendChild(tr);
     });
   }
 
   // =========================
-  // GRÁFICOS
+  // GRÁFICO
   // =========================
   function mostrarGrafico(nombre) {
     const niv = dataActual.niveles.find(n => n.codigo == nivel.value);
@@ -192,36 +184,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (chartInstance) chartInstance.destroy();
 
-    if (mes.value === "acumulado") {
-      chartInstance = new Chart(ctxGrafico, {
-        type: "line",
-        data: {
-          labels: MESES.map(m => m.toUpperCase()),
-          datasets: [{
-            label: nombre,
-            data: MESES.map(m => ind.mensual?.[m] ?? null),
-            spanGaps: true,
-            borderWidth: 2
-          }]
-        }
-      });
-    } else {
-      const valor = ind.mensual?.[normalizarMes(mes.value)] ?? null;
-
-      chartInstance = new Chart(ctxGrafico, {
-        type: "bar",
-        data: {
-          labels: [mes.value],
-          datasets: [{
-            label: nombre,
-            data: [valor]
-          }]
-        }
-      });
-    }
+    chartInstance = new Chart(ctxGrafico, {
+      type: "line",
+      data: {
+        labels: MESES.map(m => m.toUpperCase()),
+        datasets: [{
+          label: nombre,
+          data: MESES.map(m => ind.mensual?.[m] ?? null),
+          spanGaps: true,
+          borderWidth: 2
+        }]
+      }
+    });
 
     document.getElementById("modalTitulo").textContent =
-      `${nombre} – ${mes.value}`;
+      `${nombre} – Evolución anual`;
 
     new bootstrap.Modal(
       document.getElementById("modalGrafico")
@@ -231,20 +208,21 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   // EXPORTAR
   // =========================
-  btnVista.addEventListener("click", async () => {
+  btnVista.onclick = async () => {
     const canvas = await html2canvas(
       document.getElementById("vista-exportable"),
-      { scale: 2, backgroundColor: "#ffffff" }
+      { scale: 2 }
     );
     const link = document.createElement("a");
     link.download = `Atencion_Cerrada_${anio.value}.png`;
-    link.href = canvas.toDataURL("image/png");
+    link.href = canvas.toDataURL();
     link.click();
-  });
+  };
 
-  btnExcel.addEventListener("click", () => {
+  btnExcel.onclick = () => {
     const wb = XLSX.utils.book_new();
-    const niv = dataActual.niveles.find(n => n.codigo == nivel.value);
+    const niv = dataActual?.niveles?.find(n => n.codigo == nivel.value);
+    if (!niv) return;
 
     const hoja = [["Indicador", "Acumulado"]];
     INDICADORES_BASE.forEach(nombre => {
@@ -257,21 +235,21 @@ document.addEventListener("DOMContentLoaded", () => {
       XLSX.utils.aoa_to_sheet(hoja),
       "KPIs"
     );
-
     XLSX.writeFile(wb, `Atencion_Cerrada_${anio.value}.xlsx`);
-  });
+  };
 
   // =========================
   // INICIO
   // =========================
   async function iniciar() {
-    const anioNum = parseInt(anio.value, 10);
+    const year = parseInt(anio.value, 10);
 
-    dataActual = await cargarJSON(anioNum);
-    dataComparar = await cargarJSON(anioNum - 1);
+    dataActual = await cargarJSON(year);
+    dataComparar = await cargarJSON(year - 1);
 
     if (!dataActual) {
-      contenedor.innerHTML = "<p>No hay datos para este año</p>";
+      contenedor.innerHTML =
+        "<p class='text-muted'>Archivo de datos no encontrado.</p>";
       return;
     }
 
@@ -279,9 +257,9 @@ document.addEventListener("DOMContentLoaded", () => {
     render();
   }
 
-  anio.addEventListener("change", iniciar);
-  nivel.addEventListener("change", render);
-  mes.addEventListener("change", render);
+  anio.onchange = iniciar;
+  nivel.onchange = render;
+  mes.onchange = render;
 
   iniciar();
 });
