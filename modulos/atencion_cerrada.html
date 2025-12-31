@@ -5,26 +5,17 @@
   <title>Atención Cerrada | Hospital San Luis de Buin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
 
-  <!-- CSS institucional -->
   <link rel="stylesheet" href="../assets/css/estilos.css">
 </head>
 
 <body>
 
-<main class="container py-4" id="vista-exportable">
-
-  <!-- HEADER -->
-  <div class="d-flex justify-content-between align-items-start mb-3">
-    <a href="../index.html" class="btn btn-outline-secondary">← Volver</a>
-
-    <div>
-      <button id="btnExportarVista" class="btn btn-outline-secondary">Exportar vista</button>
-      <button id="btnExportarExcel" class="btn btn-outline-success ms-2">Exportar Excel</button>
-    </div>
-  </div>
+<main class="container py-4">
 
   <header class="text-center mb-4">
     <h1 class="fw-semibold">Atención Cerrada</h1>
@@ -71,10 +62,10 @@
   </section>
 
   <!-- KPIs -->
-  <section class="row g-3" id="contenedor"></section>
+  <section class="row g-3 mb-4" id="contenedor"></section>
 
   <!-- TABLA MENSUAL -->
-  <section class="mt-4">
+  <section class="mb-4">
     <h2 class="h5 mb-3">Detalle mensual</h2>
     <div class="table-responsive">
       <table class="table table-sm table-bordered" id="tabla-mensual">
@@ -92,7 +83,7 @@
   </section>
 
   <!-- TABLA COMPARATIVA -->
-  <section class="mt-4">
+  <section>
     <h2 class="h5 mb-3">Comparación anual</h2>
     <div class="table-responsive">
       <table class="table table-sm table-bordered" id="tabla-comparativa">
