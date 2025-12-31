@@ -2,112 +2,50 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Atención Cerrada | Hospital San Luis de Buin</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  >
-
-  <link rel="stylesheet" href="../assets/css/estilos.css">
+  <title>Atención Cerrada</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="bg-light">
 
-<main class="container py-4">
+<div class="container py-4">
 
-  <header class="text-center mb-4">
-    <h1 class="fw-semibold">Atención Cerrada</h1>
-    <p class="text-muted mb-0">Hospital San Luis de Buin · REM 20</p>
-  </header>
+  <h2 class="mb-4">Atención Cerrada – Indicadores</h2>
 
-  <!-- FILTROS -->
-  <section class="row g-3 mb-4">
-
+  <!-- CONTROLES -->
+  <div class="row mb-3">
     <div class="col-md-3">
-      <label class="form-label fw-semibold">Año actual</label>
-      <select id="anio" class="form-select"></select>
-    </div>
-
-    <div class="col-md-3">
-      <label class="form-label fw-semibold">Comparar con</label>
-      <select id="anioBase" class="form-select"></select>
-    </div>
-
-    <div class="col-md-6">
-      <label class="form-label fw-semibold">Servicio / Unidad</label>
-      <select id="nivel" class="form-select"></select>
-    </div>
-
-    <div class="col-md-3">
-      <label class="form-label fw-semibold">Mes (KPIs)</label>
-      <select id="mes" class="form-select">
-        <option value="acumulado">Acumulado</option>
-        <option value="enero">Enero</option>
-        <option value="febrero">Febrero</option>
-        <option value="marzo">Marzo</option>
-        <option value="abril">Abril</option>
-        <option value="mayo">Mayo</option>
-        <option value="junio">Junio</option>
-        <option value="julio">Julio</option>
-        <option value="agosto">Agosto</option>
-        <option value="septiembre">Septiembre</option>
-        <option value="octubre">Octubre</option>
-        <option value="noviembre">Noviembre</option>
-        <option value="diciembre">Diciembre</option>
+      <label>Año</label>
+      <select id="anioSelect" class="form-select">
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
       </select>
     </div>
 
-  </section>
+    <div class="col-md-6">
+      <label>Servicio / Área</label>
+      <select id="servicioSelect" class="form-select"></select>
+    </div>
+  </div>
 
-  <!-- KPIs -->
-  <section class="row g-3 mb-4" id="contenedor"></section>
-
-  <!-- TABLA MENSUAL -->
-  <section class="mb-4">
-    <h2 class="h5 mb-3">Detalle mensual</h2>
-    <div class="table-responsive">
-      <table class="table table-sm table-bordered" id="tabla-mensual">
-        <thead class="table-light">
+  <!-- TABLA -->
+  <div class="card">
+    <div class="card-body">
+      <table class="table table-sm table-bordered">
+        <thead class="table-secondary">
           <tr>
             <th>Indicador</th>
-            <th>Ene</th><th>Feb</th><th>Mar</th><th>Abr</th>
-            <th>May</th><th>Jun</th><th>Jul</th><th>Ago</th>
-            <th>Sep</th><th>Oct</th><th>Nov</th><th>Dic</th>
+            <th>Acumulado</th>
+            <th>Año</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody id="tablaIndicadores"></tbody>
       </table>
     </div>
-  </section>
+  </div>
 
-  <!-- TABLA COMPARATIVA -->
-  <section>
-    <h2 class="h5 mb-3">Comparación anual</h2>
-    <div class="table-responsive">
-      <table class="table table-sm table-bordered" id="tabla-comparativa">
-        <thead class="table-light">
-          <tr>
-            <th>Indicador</th>
-            <th>Año base</th>
-            <th>Año actual</th>
-            <th>Diferencia</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </section>
+</div>
 
-</main>
-
-<footer class="text-center text-muted py-3 small">
-  Unidad de Control de Gestión · Hospital San Luis de Buin · © 2025
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/js/atencion_cerrada.js"></script>
-
+<script src="atencion_cerrada.js"></script>
 </body>
 </html>
