@@ -1,0 +1,242 @@
+/* =========================
+   Normalización técnica segura
+   (NO elimina nada existente)
+========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* =========================
+   Identidad institucional
+   Hospital San Luis de Buin – Paine
+========================= */
+:root {
+  --color-primary: #004a99;        /* Azul institucional */
+  --color-primary-dark: #003b7a;   /* Hover */
+  --color-primary-light: #eaf2fb;  /* Fondos suaves */
+
+  --color-text-main: #222;
+  --color-text-muted: #6c757d;
+
+  --color-ok: #198754;
+  --color-warn: #fd7e14;
+  --color-bad: #dc3545;
+
+  --color-bg-page: #f5f7fa;
+  --color-bg-card: #ffffff;
+}
+
+/* =========================
+   Base
+========================= */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: var(--color-bg-page);
+  color: var(--color-text-main);
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+  margin-top: 0;
+  color: var(--color-primary);
+}
+
+/* =========================
+   Contenedores
+========================= */
+.container-narrow {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* =========================
+   Cards (override Bootstrap)
+========================= */
+.card {
+  border: none;
+  border-radius: 12px;
+  background: var(--color-bg-card);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card h2,
+.card h3 {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+/* =========================
+   KPIs / Indicadores
+========================= */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.kpi-card {
+  background: var(--color-bg-card);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  text-align: center;
+  border-top: 4px solid var(--color-primary);
+}
+
+.kpi-card h3 {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.kpi-card span {
+  font-size: 2rem;
+  font-weight: 700;
+  display: block;
+}
+
+/* =========================
+   Panel / tablas
+========================= */
+.panel {
+  background: var(--color-bg-card);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.table th {
+  background-color: #f1f3f6;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.table td {
+  font-size: 0.85rem;
+}
+
+/* =========================
+   Botones institucionales
+========================= */
+.btn {
+  font-weight: 600;
+  border-radius: 10px;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.btn-outline-primary {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+/* =========================
+   Badges / estados
+========================= */
+.badge {
+  font-size: 0.75rem;
+  padding: 0.4em 0.6em;
+}
+
+/* =========================
+   Semáforos Control de Gestión
+========================= */
+.kpi-ok   { color: var(--color-ok); }
+.kpi-warn { color: var(--color-warn); }
+.kpi-bad  { color: var(--color-bad); }
+
+.kpi-label {
+  display: inline-block;
+  font-size: 0.7rem;
+  margin-top: 0.25rem;
+  font-weight: 600;
+  padding: 0.25em 0.6em;
+  border-radius: 999px;
+}
+
+.kpi-label.ok {
+  color: var(--color-ok);
+  background-color: rgba(25, 135, 84, 0.12);
+}
+
+.kpi-label.warn {
+  color: var(--color-warn);
+  background-color: rgba(253, 126, 20, 0.15);
+}
+
+.kpi-label.bad {
+  color: var(--color-bad);
+  background-color: rgba(220, 53, 69, 0.15);
+}
+
+/* =========================
+   Tooltips
+========================= */
+[data-bs-toggle="tooltip"] {
+  cursor: help;
+}
+
+/* =========================
+   Alertas institucionales
+========================= */
+.alert-secondary {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border: none;
+}
+
+/* =========================
+   Footer
+========================= */
+footer {
+  background-color: transparent;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* =========================
+   Responsive ajustes
+========================= */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .kpi-card span {
+    font-size: 1.75rem;
+  }
+}

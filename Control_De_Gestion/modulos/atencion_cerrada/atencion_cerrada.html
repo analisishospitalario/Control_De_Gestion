@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Atención Cerrada – Control de Gestión</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CSS institucional -->
+  <link rel="stylesheet" href="../assets/css/estilos.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+</head>
+
+<body>
+
+<main class="container py-5">
+
+  <!-- HEADER -->
+  <h2 class="mb-4">Atención Cerrada – Indicadores de Gestión</h2>
+
+  <!-- ============================= -->
+  <!-- VISTA DIRECCIÓN (RESUMEN) -->
+  <!-- ============================= -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="mb-3">Resumen Ejecutivo – Dirección</h5>
+      <ul id="resumenDireccion" class="mb-0"></ul>
+    </div>
+  </div>
+
+  <!-- ============================= -->
+  <!-- FILTROS -->
+  <!-- ============================= -->
+  <div class="row g-3 mb-3">
+    <div class="col-md-3">
+      <label class="form-label">Año base</label>
+      <select id="anioBase" class="form-select">
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <label class="form-label">Año comparación</label>
+      <select id="anioComp" class="form-select">
+        <option value="2025">2025</option>
+        <option value="2024">2024</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Servicio / Área</label>
+      <select id="servicioSelect" class="form-select"></select>
+    </div>
+  </div>
+
+  <!-- ============================= -->
+  <!-- BOTONES DE EXPORTACIÓN -->
+  <!-- ============================= -->
+  <div class="d-flex gap-2 mb-4">
+    <button class="btn btn-outline-primary" onclick="exportarCSV()">CSV Anual</button>
+    <button class="btn btn-outline-primary" onclick="exportarJSON()">JSON</button>
+    <button class="btn btn-outline-success" onclick="exportarExcelMensual()">Excel Mensual</button>
+  </div>
+
+  <!-- ============================= -->
+  <!-- KPIs SUPERIORES -->
+  <!-- ============================= -->
+  <section class="kpis mb-4">
+    <div class="kpi-card">
+      <h3>Índice Ocupacional</h3>
+      <span id="kpiOcupacion">—</span>
+      <div id="kpiOcupacionLabel" class="kpi-label"></div>
+    </div>
+
+    <div class="kpi-card">
+      <h3>Promedio Días de Estada</h3>
+      <span id="kpiEstada">—</span>
+    </div>
+
+    <div class="kpi-card">
+      <h3>Letalidad</h3>
+      <span id="kpiLetalidad">—</span>
+    </div>
+
+    <div class="kpi-card">
+      <h3>Traslados</h3>
+      <span id="kpiTraslados">—</span>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- ALERTAS -->
+  <!-- ============================= -->
+  <div id="alertasGestion" class="mb-4"></div>
+
+  <!-- ============================= -->
+  <!-- TABLA KPI -->
+  <!-- ============================= -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <table class="table table-sm table-bordered">
+        <thead class="table-secondary">
+          <tr>
+            <th>Indicador</th>
+            <th>Año Base</th>
+            <th>Año Comp.</th>
+            <th>Variación</th>
+          </tr>
+        </thead>
+        <tbody id="tablaKPIs"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ============================= -->
+  <!-- GRÁFICO COMPARATIVO -->
+  <!-- ============================= -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <canvas id="grafico"></canvas>
+    </div>
+  </div>
+
+  <!-- ============================= -->
+  <!-- TENDENCIA MENSUAL -->
+  <!-- ============================= -->
+  <div class="card mb-4">
+    <div class="card-body">
+
+      <div class="row align-items-end mb-3">
+        <div class="col-md-6">
+          <h5 class="mb-0">Tendencia Mensual</h5>
+          <small class="text-muted">Servicio vs Promedio Hospital</small>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label small">Indicador</label>
+          <select id="indicadorMensual" class="form-select form-select-sm">
+            <option value="Indice Ocupacional">Índice Ocupacional</option>
+            <option value="Promedio Días de Estada">Promedio Días de Estada</option>
+            <option value="Letalidad">Letalidad</option>
+            <option value="Traslados">Traslados</option>
+          </select>
+        </div>
+      </div>
+
+      <canvas id="graficoMensual"></canvas>
+
+    </div>
+  </div>
+
+  <!-- ============================= -->
+  <!-- RANKING -->
+  <!-- ============================= -->
+  <div class="card">
+    <div class="card-body">
+      <h5>Ranking de Servicios – Índice Ocupacional</h5>
+      <ul id="ranking" class="list-group"></ul>
+    </div>
+  </div>
+
+</main>
+
+<!-- ============================= -->
+<!-- SCRIPTS -->
+<!-- ============================= -->
+<script src="atencion_cerrada.js"></script>
+<script src="atencion_cerrada_kpi.js"></script>
+<script src="atencion_cerrada_alertas.js"></script>
+<script src="atencion_cerrada_direccion.js"></script>
+<script src="atencion_cerrada_export.js"></script>
+<script src="atencion_cerrada_excel.js"></script>
+<script src="atencion_cerrada_tendencia.js"></script>
+
+</body>
+</html>
